@@ -1,0 +1,4 @@
+# flask virtualenv
+flask/
+*.py[c]
+db/*.db
