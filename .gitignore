@@ -2,3 +2,4 @@
 flask/
 *.py[c]
 db/*.db
+**/.DS_Store
