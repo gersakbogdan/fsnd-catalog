@@ -7,6 +7,6 @@ app.config.from_object('config')
 db = SQLAlchemy(app)
 
 lm = LoginManager(app)
-lm.login_view = 'index'
+lm.login_view = 'general.index'
 
 import views, models

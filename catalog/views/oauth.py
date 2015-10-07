@@ -37,3 +37,8 @@ def callback(provider):
 
     login_user(user, True)
     return redirect(url_for('general.index'))
+
+@mod.route('/logout/')
+def logout():
+    logout_user()
+    return redirect(url_for('general.index'))
