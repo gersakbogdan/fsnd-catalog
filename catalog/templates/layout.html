@@ -8,11 +8,13 @@
         <meta name="author" content="Bogdan Gersak">
         <title>Recipes catalog - Full Stack Nanodegree</title>
         <!-- Bootstrap Core CSS -->
-        <link href="static/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/static/css/bootstrap.min.css" rel="stylesheet">
         <!-- Custom CSS -->
-        <link href="static/css/recipes.css" rel="stylesheet">
+        <link href="/static/css/recipes.css" rel="stylesheet">
         <!-- Custom Fonts -->
-        <link href="static/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link href="/static/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="/static/icons/favicon.ico">
     </head>
     <body>
         {% block navigation %}
@@ -43,6 +45,9 @@
                                     <a href="{{ url_for('general.profile') }}">My profile</a>
                                 </li>
                                 <li>
+                                    <a href="{{ url_for('recipes.new') }}">Add recipe</a>
+                                </li>
+                                <li>
                                     <a href="{{ url_for('oauth.logout') }}">Logout</a>
                                 </li>
                             </ul>
@@ -50,15 +55,15 @@
                         {% else %}
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Login <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
+                            <ul class="dropdown-menu social">
                                 <li>
-                                    <a href="{{ url_for('oauth.authorize', provider='twitter') }}">Login with Twitter</a>
+                                    <a href="{{ url_for('oauth.authorize', provider='facebook') }}"><i class="fa fa-facebook-square fa-2x"></i> Facebook</a>
                                 </li>
                                 <li>
-                                    <a href="{{ url_for('oauth.authorize', provider='facebook') }}">Login with Facebook</a>
+                                    <a href="{{ url_for('oauth.authorize', provider='twitter') }}"><i class="fa fa-twitter-square fa-2x"></i> Twitter</a>
                                 </li>
                                 <li>
-                                    <a href="{{ url_for('oauth.authorize', provider='google') }}">Login with Google Plus</a>
+                                    <a href="{{ url_for('oauth.authorize', provider='google') }}"><i class="fa fa-google-plus-square fa-2x"></i> Google Plus</a>
                                 </li>
                             </ul>
                         </li>
@@ -115,7 +120,7 @@
 
         <!-- Page Content -->
         <div class="container">
-            {% block body %}{% endblock %}
+            {% block content %}{% endblock %}
             <!-- Footer -->
             <footer>
                 <div class="row">
@@ -129,9 +134,9 @@
         <!-- /.container -->
 
         <!-- jQuery -->
-        <script src="static/js/jquery.js"></script>
+        <script src="/static/js/jquery.js"></script>
         <!-- Bootstrap Core JavaScript -->
-        <script src="static/js/bootstrap.min.js"></script>
+        <script src="/static/js/bootstrap.min.js"></script>
         <!-- Script to Activate the Carousel -->
         <script>
         $('.carousel').carousel({

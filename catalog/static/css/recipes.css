@@ -23,6 +23,9 @@ body {
     opacity: 0.8;
 }
 
+.fa-2x {
+  vertical-align: middle;
+}
 /* Home Page Carousel */
 
 header.carousel {
