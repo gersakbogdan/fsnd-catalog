@@ -1,3 +1,4 @@
+#!flask/bin/python
 from catalog import db
 from catalog.models.category import Category
 
@@ -10,3 +11,4 @@ db.session.add(dessert)
 db.session.add(chicken)
 db.session.add(main_dish)
 db.session.add(appetizer)
+db.session.commit()
