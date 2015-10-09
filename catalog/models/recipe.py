@@ -18,10 +18,13 @@ class Recipe(db.Model):
     servings = db.Column(db.Integer, nullable=False)
     pub_date = db.Column(db.DateTime)
 
+    user = db.relationship('User', backref=db.backref('recipes', lazy='dynamic'))
+    category = db.relationship('Category', backref=db.backref('recipes', lazy='dynamic'))
 
-    def __init__(self, user_id, category_id, title, description, ingredients, directions, prep_time, cook_time, servings):
-        self.user_id = user_id
-        self.category_id = category_id
+    def __init__(self, user, category, title, description,
+        ingredients, directions, prep_time, cook_time, servings, pub_date=None):
+        self.user = user
+        self.category = category
         self.title = title
         self.description = description
         self.ingredients = ingredients
@@ -29,7 +32,10 @@ class Recipe(db.Model):
         self.prep_time = prep_time
         self.cook_time = cook_time
         self.servings = servings
-        self.pub_date = datetime.utcnow()
+
+        if pub_date is None:
+            pub_date = datetime.utcnow()
+        self.pub_date = pub_date
 
     def to_json(self):
         return dict(id=self.id,

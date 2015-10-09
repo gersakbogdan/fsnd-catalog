@@ -17,8 +17,8 @@ def new():
     if form.validate_on_submit():
         print 'form submitted'
         recipe = Recipe(
-            current_user.id,
-            form.category.data.id,
+            current_user,
+            form.category.data,
             form.title.data,
             form.description.data,
             form.ingredients.data,
