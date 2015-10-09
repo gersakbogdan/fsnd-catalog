@@ -1,4 +1,4 @@
-FSND Catalog Project
+FSND Catalog Project (work in progress)
 
 $ virtualenv flask
 
