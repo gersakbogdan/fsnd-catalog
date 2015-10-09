@@ -1,8 +1,9 @@
-from catalog.models.category import Category
 from flask.ext.wtf import Form
 from wtforms import StringField, TextAreaField, IntegerField
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
 from wtforms.validators import Required, Length, NumberRange
+
+from catalog.models.category import Category
 
 def categories():
     return Category.query.order_by(Category.name)

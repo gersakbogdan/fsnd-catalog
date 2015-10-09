@@ -5,7 +5,6 @@ from flask.ext.login import UserMixin
 
 class User(UserMixin, db.Model):
     __tablename__ = 'user'
-    __table_args__ = {'useexisting': True}
 
     id = db.Column(db.Integer, primary_key=True)
     social_id = db.Column(db.String(64), nullable=False, unique=True)

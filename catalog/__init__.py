@@ -9,4 +9,4 @@ db = SQLAlchemy(app)
 lm = LoginManager(app)
 lm.login_view = 'general.index'
 
-import views, models
+import views

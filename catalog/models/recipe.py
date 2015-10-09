@@ -1,13 +1,10 @@
 from catalog import db
-from catalog.models.user import User
-from catalog.models.category import Category
 
 from datetime import datetime
 from flask import url_for
 
 class Recipe(db.Model):
     __tablename__ = 'recipe'
-    __table_args__ = {'useexisting': True}
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
@@ -20,9 +17,6 @@ class Recipe(db.Model):
     cook_time = db.Column(db.Integer, nullable=False)
     servings = db.Column(db.Integer, nullable=False)
     pub_date = db.Column(db.DateTime)
-
-    #user_recipes = db.relation(User, backref=db.backref('recipes', lazy='dynamic'))
-    #category_recipes = db.relation(Category, backref=db.backref('recipes', lazy='dynamic'))
 
 
     def __init__(self, user_id, category_id, title, description, ingredients, directions, prep_time, cook_time, servings):
