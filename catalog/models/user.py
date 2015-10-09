@@ -4,7 +4,7 @@ from datetime import datetime
 from flask.ext.login import UserMixin
 
 class User(UserMixin, db.Model):
-    __tablename__ = 'users'
+    __tablename__ = 'user'
     __table_args__ = {'useexisting': True}
 
     id = db.Column(db.Integer, primary_key=True)

@@ -6,7 +6,7 @@ from werkzeug import cached_property
 from flask import url_for
 
 class Category(db.Model):
-    __tablename__ = 'categories'
+    __tablename__ = 'category'
     __table_args__ = {'useexisting': True}
 
     id = db.Column(db.Integer, primary_key=True)

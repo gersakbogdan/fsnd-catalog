@@ -11,34 +11,41 @@
                 <!-- /.row -->
 
                 <div class="row">
-                    <form name="sentMessage" id="contactForm" novalidate>
+                    <form name="recipeForm" id="newRecipeForm" method="post" novalidate>
+                        {{ form.csrf_token }}
                         <div class="col-md-8">
                             <div class="control-group form-group">
                                 <div class="controls">
+                                    <label>Category:</label>
+                                    {{ form.category(class='form-control', **{'data-validation-required-message':'Please select category'}) }}
+                                </div>
+                            </div>
+                            <div class="control-group form-group">
+                                <div class="controls">
                                     <label>Recipe title:</label>
-                                    <input type="text" class="form-control" id="title" required data-validation-required-message="Please enter recipe title.">
+                                    {{ form.title(class='form-control', required=true, **{'data-validation-required-message':'Please enter recipe title'}) }}
                                     <p class="help-block"></p>
                                 </div>
                             </div>
                             <div class="control-group form-group">
                                 <div class="controls">
                                     <label>Description:</label>
-                                    <textarea rows="3" cols="100" class="form-control" id="description" required data-validation-required-message="Please enter a description" maxlength="999" style="resize:none"></textarea>
+                                    {{ form.description(rows=3, cols=100, class='form-control', required=true, maxlength=250, style='resize:none', **{'data-validation-required-message':'Please enter a description'}) }}
                                 </div>
                             </div>
                             <div class="control-group form-group">
                                 <div class="controls">
                                     <label>Ingredients:</label>
-                                    <textarea rows="7" cols="100" class="form-control" id="description" required data-validation-required-message="Please enter ingredients" placeholder="Put each ingredient on its own line." maxlength="999"></textarea>
+                                    {{ form.ingredients(rows=7, cols=100, class='form-control', required=true, maxlength=999, placeholder='Put each ingredient on its own line.', **{'data-validation-required-message':'Please add some ingredients'}) }}
                                 </div>
                             </div>
                             <div class="control-group form-group">
                                 <div class="controls">
                                     <label>Directions:</label>
-                                    <textarea rows="7" cols="100" class="form-control" id="description" required data-validation-required-message="Please enter directions" placeholder="Put each step on its own line." maxlength="999"></textarea>
+                                    {{ form.directions(rows=7, cols=100, class='form-control', required=true, maxlength=999, placeholder='Put each step on its own line.', **{'data-validation-required-message':'Please enter directions'}) }}
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-primary">Save Recipe</button>
+                            <button type="submit" class="btn btn-primary">Add Recipe</button>
                         </div>
 
                         <div class="col-md-4">
@@ -47,8 +54,7 @@
                                     <div class="control-group form-group">
                                         <div class="controls">
                                             <label>Prep time:</label>
-                                            <input type="text" class="form-control" id="prep-time" required data-validation-required-message="Please enter preparation time.">
-                                            <p class="help-block"></p>
+                                            {{ form.prep_time(class='form-control', required=true, **{'data-validation-required-message':'Please add preparation time'}) }}
                                         </div>
                                     </div>
                                 </div>
@@ -56,8 +62,7 @@
                                     <div class="control-group form-group">
                                         <div class="controls">
                                             <label>Cook time:</label>
-                                            <input type="text" class="form-control" id="cook-time" required data-validation-required-message="Please enter cook time.">
-                                            <p class="help-block"></p>
+                                            {{ form.cook_time(class='form-control', required=true, **{'data-validation-required-message':'Please add cook time'}) }}
                                         </div>
                                     </div>
                                 </div>
@@ -67,8 +72,7 @@
                                     <div class="control-group form-group">
                                         <div class="controls">
                                             <label>Number of servings:</label>
-                                            <input type="text" class="form-control" id="number-of-servings" required data-validation-required-message="Please enter number of servings.">
-                                            <p class="help-block"></p>
+                                            {{ form.servings(class='form-control', required=true, **{'data-validation-required-message':'Please add number of servings'}) }}
                                         </div>
                                     </div>
                                 </div>

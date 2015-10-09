@@ -39,7 +39,7 @@
                         </li>
                         {% if current_user.is_authenticated %}
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Hi, {{ current_user.name }} <b class="caret"></b></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ current_user.name }} <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li>
                                     <a href="{{ url_for('general.profile') }}">My profile</a>
@@ -47,14 +47,16 @@
                                 <li>
                                     <a href="{{ url_for('recipes.new') }}">Add recipe</a>
                                 </li>
+                                <li class="divider"></li>
                                 <li>
-                                    <a href="{{ url_for('oauth.logout') }}">Logout</a>
+                                <li>
+                                    <a href="{{ url_for('oauth.logout') }}">Sign Out</a>
                                 </li>
                             </ul>
                         </li>
                         {% else %}
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Login <b class="caret"></b></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sign In <b class="caret"></b></a>
                             <ul class="dropdown-menu social">
                                 <li>
                                     <a href="{{ url_for('oauth.authorize', provider='facebook') }}"><i class="fa fa-facebook-square fa-2x"></i> Facebook</a>
@@ -63,7 +65,7 @@
                                     <a href="{{ url_for('oauth.authorize', provider='twitter') }}"><i class="fa fa-twitter-square fa-2x"></i> Twitter</a>
                                 </li>
                                 <li>
-                                    <a href="{{ url_for('oauth.authorize', provider='google') }}"><i class="fa fa-google-plus-square fa-2x"></i> Google Plus</a>
+                                    <a href="{{ url_for('oauth.authorize', provider='google') }}"><i class="fa fa-google-plus-square fa-2x"></i> Google+</a>
                                 </li>
                             </ul>
                         </li>
