@@ -29,6 +29,8 @@ db.session.add(meat)
 sea = Category('Seafood', 'Top recipes for fish, shellfish, and hearty chowder. See easy ways to make seafood part of your low-cal diet.')
 db.session.add(sea)
 
+db.session.commit()
+
 appetizer_recipe_1 = Recipe(
     user,
     appetizer,
@@ -39,7 +41,7 @@ appetizer_recipe_1 = Recipe(
     1 (12-oz.) French bread baguette, cut into 15 to 20 (1/2-inch-thick) slices\
     3 tablespoons butter, softened\r\n2 ounces crumbled blue cheese, softened\r\n1/3 cup chopped toasted pecans\
     Garnish: chopped fresh thyme',
-    'Preheat oven to 425°. Toss together first 6 ingredients.\
+    'Preheat oven to 425F. Toss together first 6 ingredients.\
     Arrange grapes in a single layer in a small roasting pan; \
     bake 15 to 20 minutes or until grapes wilt and liquid forms a thin syrup. \
     Remove from oven.2. Increase oven temperature to broil with oven rack 7 inches from heat. \
@@ -55,8 +57,8 @@ db.session.add(appetizer_recipe_1)
 bbq_recipe_1 = Recipe(
     user,
     bbq,
-    'Moink Balls – Smoked Bacon Wrapped Meatballs',
-    'MOINK. Well this is a crazy word isn\'t it? This word has been circulating around the internet BBQ world for quite some time. The general idea is that it came from “moo” and “oink” put together since you\'re using beef meatballs and pork bacon. MOINK balls are bacon wrapped meatballs that are smoked for about 1.5 hours. They are dusted with BBQ dry rub and brushed with BBQ sauce. I decided to give it a try. It\'s a really simple and tasty appetizer.',
+    'Moink Balls - Smoked Bacon Wrapped Meatballs',
+    'MOINK. Well this is a crazy word isn\'t it? This word has been circulating around the internet BBQ world for quite some time. The general idea is that it came from "moo" and "oink" put together since you\'re using beef meatballs and pork bacon. MOINK balls are bacon wrapped meatballs that are smoked for about 1.5 hours. They are dusted with BBQ dry rub and brushed with BBQ sauce. I decided to give it a try. It\'s a really simple and tasty appetizer.',
     'Bag of meatballs from the frozen food section (not Italian seasoned); thawed\r\n\
     Any BBQ dry rub you have in your pantry\r\n\
     1 pack of bacon\r\n\
@@ -69,5 +71,6 @@ bbq_recipe_1 = Recipe(
     90,
     8
 )
+db.session.add(bbq_recipe_1)
 # save changes
 db.session.commit()
