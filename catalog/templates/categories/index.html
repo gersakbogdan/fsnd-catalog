@@ -1,1 +1,47 @@
-index.html - categories
+{% extends 'layout.html' %}
+                {% block carousel %}{% endblock %}
+                {% block content %}
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">All Categories</h1>
+                    </div>
+                </div>
+
+                <div class="row">
+                    {% if current_user.is_authenticated and current_user.is_admin %}
+                    <div class="col-md-2 col-sm-6">
+                        <div class="panel text-center">
+                            <div class="panel-heading">
+                                <i class="fa"></i>
+                                <a class="category" href="{{ url_for('categories.new') }}">
+                                    <img class="img-responsive img-category img-circle" src="/static/images/plus.png" />
+                                    <span>Add</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% for category in categories %}
+                    <div class="col-md-2 col-sm-6">
+                        <div class="panel text-center">
+                            <div class="panel-heading">
+                                {% if current_user.is_authenticated and current_user.is_admin %}
+                                <a class="category editCategoryAnchor" href="{{ url_for('categories.edit', category_id=category.id) }}" title="Edit">
+                                    <i class="fa fa-pencil-square-o fa-fw"></i>
+                                </a>
+                                <a class="category deleteCategoryAnchor" href="{{ url_for('categories.delete', category_id=category.id) }}" title="Delete">
+                                    <i class="fa fa-trash-o fa-fw"></i>
+                                </a>
+                                {% endif %}
+                                <a class="category" href="{{ url_for('recipes.category', category_id=category.id) }}" title="View recipes">
+                                    <img class="img-responsive img-category img-circle" src="{{ category.image_src }}" />
+                                    <span>{{ category.name }}</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                {% endblock %}

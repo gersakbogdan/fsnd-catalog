@@ -42,15 +42,21 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ current_user.name }} <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="{{ url_for('general.profile') }}">My profile</a>
-                                </li>
-                                <li>
-                                    <a href="{{ url_for('recipes.new') }}">Add recipe</a>
+                                    <a href="{{ url_for('recipes.new') }}"><i class="fa fa-plus fa-fw"></i> Add recipe</a>
                                 </li>
                                 <li class="divider"></li>
                                 <li>
+                                    <a href="{{ url_for('recipes.index') }}"><i class="fa fa-list fa-fw"></i> My recipes</a>
+                                </li>
+                                {% if current_user.is_admin %}
+                                <li class="divider"></li>
                                 <li>
-                                    <a href="{{ url_for('oauth.logout') }}">Sign Out</a>
+                                    <a href="{{ url_for('categories.index') }}"><i class="fa fa-pencil fa-fw"></i> Edit categories</a>
+                                </li>
+                                {% endif %}
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="{{ url_for('oauth.logout') }}"><i class="fa fa-sign-out fa-fw"></i> Sign Out</a>
                                 </li>
                             </ul>
                         </li>
@@ -59,13 +65,15 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sign In <b class="caret"></b></a>
                             <ul class="dropdown-menu social">
                                 <li>
-                                    <a href="{{ url_for('oauth.authorize', provider='facebook') }}"><i class="fa fa-facebook-square fa-2x"></i> Facebook</a>
+                                    <a href="{{ url_for('oauth.authorize', provider='facebook') }}"><i class="fa fa-facebook-square fa-2x fa-fw"></i> Facebook</a>
                                 </li>
+                                <li class="divider"></li>
                                 <li>
-                                    <a href="{{ url_for('oauth.authorize', provider='twitter') }}"><i class="fa fa-twitter-square fa-2x"></i> Twitter</a>
+                                    <a href="{{ url_for('oauth.authorize', provider='twitter') }}"><i class="fa fa-twitter-square fa-2x fa-fw"></i> Twitter</a>
                                 </li>
+                                <li class="divider"></li>
                                 <li>
-                                    <a href="{{ url_for('oauth.authorize', provider='google') }}"><i class="fa fa-google-plus-square fa-2x"></i> Google+</a>
+                                    <a href="{{ url_for('oauth.authorize', provider='google') }}"><i class="fa fa-google-plus-square fa-2x fa-fw"></i> Google+</a>
                                 </li>
                             </ul>
                         </li>
@@ -77,6 +85,19 @@
             <!-- /.container -->
         </nav>
         {% endblock %}
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for (type, message) in messages %}
+        <div class="recipe-alert text-center">
+            <div class="alert alert-{{ type }} fade in">
+              <button class="close" data-dismiss="alert">×</button>
+              {{ message }}
+            </div>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
 
         {% block carousel %}
         <!-- Header Carousel -->
@@ -92,21 +113,12 @@
             <div class="carousel-inner">
                 <div class="item">
                     <div class="fill" style="background-image:url('/static/images/recipes-carousel-1.jpg');"></div>
-                    <div class="carousel-caption">
-                        <h2>Caption 1</h2>
-                    </div>
                 </div>
                 <div class="item active">
                     <div class="fill" style="background-image:url('/static/images/recipes-carousel-2.jpg');"></div>
-                    <div class="carousel-caption">
-                        <h2>Caption 2</h2>
-                    </div>
                 </div>
                 <div class="item">
                     <div class="fill" style="background-image:url('/static/images/recipes-carousel-3.jpg');"></div>
-                    <div class="carousel-caption">
-                        <h2>Caption 3</h2>
-                    </div>
                 </div>
             </div>
 
@@ -123,6 +135,9 @@
         <!-- Page Content -->
         <div class="container">
             {% block content %}{% endblock %}
+
+            <hr />
+
             <!-- Footer -->
             <footer>
                 <div class="row">
@@ -137,6 +152,8 @@
 
         <!-- jQuery -->
         <script src="/static/js/jquery.js"></script>
+        <!-- Recipes library -->
+        <script src="/static/js/recipes.js"></script>
         <!-- Bootstrap Core JavaScript -->
         <script src="/static/js/bootstrap.min.js"></script>
         <!-- Script to Activate the Carousel -->

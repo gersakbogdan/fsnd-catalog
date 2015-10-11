@@ -1,6 +1,5 @@
 from catalog import app, db
 from datetime import datetime
-
 from flask.ext.login import UserMixin
 
 class User(UserMixin, db.Model):

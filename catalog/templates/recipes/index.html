@@ -1,1 +1,27 @@
-index.html - recipes
+{% extends 'layout.html' %}
+                {% block carousel %}{% endblock %}
+                {% block content %}
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">My recipes</h1>
+                    </div>
+                </div>
+
+                <div class="row">
+                {% if recipes|length == 0 %}
+                    <div class="col-lg-12 text-center">
+                        <div>Hmm, there are no recipes here! <a href="{{ url_for('recipes.new') }}">Add one!</a></div>
+                    </div>
+                {% else %}
+                    {% for recipe in recipes %}
+                    <div class="col-md-3 col-sm-6">
+                        <a href="portfolio-item.html">
+                            <img class="img-responsive img-rounded img-hover" src="/{{config.URL_UPLOAD_FOLDER}}/recipes/{{recipe.images[0].filename}}" alt="">
+                        </a>
+                    </div>
+                    {% endfor %}
+                {% endif %}
+                </div>
+
+                {% endblock %}

@@ -15,8 +15,8 @@ body {
     padding-top: 50px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
 }
 
-.img-portfolio {
-    margin-bottom: 30px;
+.img-category {
+    border: 1px solid #C70A3E;
 }
 
 .img-hover:hover {
@@ -26,6 +26,19 @@ body {
 .fa-2x {
   vertical-align: middle;
 }
+
+.recipe-alert {
+    max-width: 800px;
+    margin: 20px auto 0px auto;
+}
+.recipe-alert .alert {
+    margin-bottom: 0px;
+}
+
+a.category {
+    color: black;
+}
+
 /* Home Page Carousel */
 
 header.carousel {

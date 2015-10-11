@@ -17,9 +17,13 @@ OAUTH_CREDENTIALS = {
         'secret': 'm9TEd58DSEtRrZHpz2EjrV9AhsBRxKMo8m3kuIZj3zLwzwIimt'
     }
 }
+
 # pagination
 RECIPES_PER_PAGE = 3
 # admin users
-ADMIN = frozenset(['gersakbogdan@yahoo.com'])
+ADMIN = frozenset(['bogdan@gersak.ro'])
+
+UPLOAD_FOLDER = os.path.join(basedir, 'catalog', 'static', 'upload')
+URL_UPLOAD_FOLDER = os.path.join('static', 'upload')
 
 del os

@@ -1,5 +1,4 @@
 from catalog import db
-
 from datetime import datetime
 from flask import url_for
 
@@ -9,17 +8,17 @@ class Recipe(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
-    title = db.Column(db.String(250), nullable=False)
-    description = db.Column(db.String(250), nullable=False)
-    ingredients = db.Column(db.String(999), nullable=False)
-    directions = db.Column(db.String(999), nullable=False)
+    title = db.Column(db.String(200), nullable=False)
+    description = db.Column(db.String(500), nullable=False)
+    ingredients = db.Column(db.String(), nullable=False)
+    directions = db.Column(db.String(), nullable=False)
     prep_time = db.Column(db.Integer, nullable=False)
     cook_time = db.Column(db.Integer, nullable=False)
     servings = db.Column(db.Integer, nullable=False)
     pub_date = db.Column(db.DateTime)
 
-    user = db.relationship('User', backref=db.backref('recipes', lazy='dynamic'))
-    category = db.relationship('Category', backref=db.backref('recipes', lazy='dynamic'))
+    user = db.relationship('User', backref=db.backref('recipes', cascade='delete, delete-orphan', lazy='dynamic'))
+    category = db.relationship('Category', backref=db.backref('recipes', cascade='delete, delete-orphan', lazy='dynamic'))
 
     def __init__(self, user, category, title, description,
         ingredients, directions, prep_time, cook_time, servings, pub_date=None):
@@ -50,3 +49,24 @@ class Recipe(db.Model):
     def url(self):
         return url_for('recipes.show', id=self.id)
 
+    def __repr__(self):
+        return '<Recipe %r>' % (self.title)
+
+
+class RecipeImage(db.Model):
+    __tablename__ = 'recipe_image'
+
+    id = db.Column(db.Integer, primary_key=True)
+    recipe_id = db.Column(db.Integer, db.ForeignKey('recipe.id'))
+    filename = db.Column(db.String(250), nullable=False)
+    hidden = db.Column(db.Boolean, nullable=False)
+
+    recipe = db.relationship('Recipe', backref=db.backref('images', lazy='dynamic'))
+
+    def __init__(self, recipe, filename, hidden=False):
+        self.recipe = recipe
+        self.filename = filename
+        self.hidden = hidden
+
+    def __repr__(self):
+        return '<Image %r %r>' % (self.id, self.recipe_id)

@@ -1,1 +1,49 @@
-edit.html - category: {{ id }}
+{% extends 'layout.html' %}
+                {% block carousel %}{% endblock %}
+                {% block content %}
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">Edit Category</h1>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <form name="editCategoryForm" id="editCategoryForm" method="post" enctype="multipart/form-data" novalidate>
+                        {{ form.csrf_token }}
+                        <div class="col-md-8">
+                            <div class="control-group form-group">
+                                <div class="controls">
+                                    <label>Name:</label>
+                                    {{ form.name(class='form-control', required=true, maxlength=20, **{'data-validation-required-message':'Please enter category title'}) }}
+                                </div>
+                            </div>
+                            <div class="control-group form-group">
+                                <div class="controls">
+                                    <label>Description:</label>
+                                    {{ form.description(rows=3, cols=100, class='form-control', required=true, maxlength=500, **{'data-validation-required-message':'Please enter a description'}) }}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <div class="control-group form-group">
+                                        <div class="controls">
+                                            <label>Image:</label>
+                                            {{ form.image(class='form-control') }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="control-group form-group">
+                                        <div class="controls">
+                                            <img class="img-responsive img-category img-circle" src="{{ category_image }}" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Save Category</button>
+                        </div>
+                    </form>
+                </div>
+
+                {% endblock %}
