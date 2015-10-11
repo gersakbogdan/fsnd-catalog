@@ -23,7 +23,7 @@ body {
     opacity: 0.8;
 }
 
-.fa-2x {
+.fa-2x, .fa-3x {
   vertical-align: middle;
 }
 
@@ -43,6 +43,13 @@ a.category {
     margin: 10px 0 20px;
 }
 
+.ingredients-header {
+    margin-top: 20px;
+}
+ul.ingredients li {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
 /* Home Page Carousel */
 
 header.carousel {

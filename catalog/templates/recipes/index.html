@@ -31,7 +31,7 @@
                                 <a class="category deleteAnchor" href="{{ url_for('recipes.delete', recipe_id=recipe.id) }}" data-type="recipe" title="Delete">
                                     <i class="fa fa-trash-o fa-fw"></i>
                                 </a>
-                                <a href="{{ url_for('recipes.view', recipe_id=recipe.id, slug=recipe.category.slug) }}">
+                                <a href="{{ url_for('recipes.view', recipe_id=recipe.id, slug=recipe.slug) }}">
                                     <img class="img-responsive img-rounded img-hover img-category" src="{{ recipe.image_src }}">
                                 </a>
                                 <h5 title="{{ recipe.title }}"><i>{{ recipe.title }}</i></h5>

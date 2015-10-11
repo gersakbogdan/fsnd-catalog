@@ -1,4 +1,5 @@
 from catalog import app, db
+from catalog.helpers import slugify
 from datetime import datetime
 
 from config import URL_UPLOAD_FOLDER
@@ -27,6 +28,10 @@ class Category(db.Model):
     @property
     def url(self):
         return url_for('recipes.category', id=self.id)
+
+    @property
+    def slug(self):
+        return slugify(self.name)
 
     @property
     def image_src(self):

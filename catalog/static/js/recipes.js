@@ -22,4 +22,8 @@ if (typeof jQuery === 'undefined') {
         return false;
     });
 
+    /* Setup carousel */
+    $('.carousel').carousel({
+        interval: 5000
+    });
 }(jQuery);

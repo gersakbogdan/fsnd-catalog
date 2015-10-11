@@ -1,4 +1,5 @@
 from catalog import db
+from catalog.helpers import slugify
 from datetime import datetime
 from flask import url_for
 
@@ -50,6 +51,10 @@ class Recipe(db.Model):
     @property
     def url(self):
         return url_for('recipes.show', id=self.id)
+
+    @property
+    def slug(self):
+        return slugify(self.title)
 
     @property
     def image_src(self):

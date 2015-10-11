@@ -8,9 +8,10 @@ from catalog.helpers import upload_recipe_image
 
 mod = Blueprint('recipes', __name__, url_prefix='/recipes')
 
-@mod.route('/<int:recipe_id>/<slug>')
-def view(recipe_id):
-    return render_template('recipes/view.html', recipe_id=recipe_id)
+@mod.route('/<int:recipe_id>/<slug>/')
+def view(recipe_id, slug):
+    recipe = db.session.query(Recipe).filter_by(id=recipe_id).one()
+    return render_template('recipes/view.html', recipe=recipe)
 
 @mod.route('/my/')
 @login_required
