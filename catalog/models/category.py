@@ -1,6 +1,7 @@
 from catalog import app, db
-from config import URL_UPLOAD_FOLDER
 from datetime import datetime
+
+from config import URL_UPLOAD_FOLDER
 
 from werkzeug import cached_property
 from flask import url_for
@@ -30,7 +31,6 @@ class Category(db.Model):
     @property
     def image_src(self):
         return '/%s/categories/%s.png' % (URL_UPLOAD_FOLDER, self.id)
-        #return '/%s/categories/%s.png?%s' % (URL_UPLOAD_FOLDER, self.id, datetime.now().strftime('%Y%m%d%H%M%S'))
 
     def __repr__(self):
         return '<Category %r>' % (self.name)

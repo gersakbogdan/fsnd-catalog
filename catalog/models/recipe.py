@@ -2,6 +2,8 @@ from catalog import db
 from datetime import datetime
 from flask import url_for
 
+from config import URL_UPLOAD_FOLDER
+
 class Recipe(db.Model):
     __tablename__ = 'recipe'
 
@@ -49,6 +51,12 @@ class Recipe(db.Model):
     def url(self):
         return url_for('recipes.show', id=self.id)
 
+    @property
+    def image_src(self):
+        if self.images.count() > 0 and self.images[0].filename:
+            return '/%s/recipes/%s' % (URL_UPLOAD_FOLDER, self.images[0].filename)
+        return '/static/images/no-image.png'
+
     def __repr__(self):
         return '<Recipe %r>' % (self.title)
 
@@ -67,6 +75,10 @@ class RecipeImage(db.Model):
         self.recipe = recipe
         self.filename = filename
         self.hidden = hidden
+
+    @property
+    def src(self):
+        return '/%s/recipes/%s' % (URL_UPLOAD_FOLDER, self.filename)
 
     def __repr__(self):
         return '<Image %r %r>' % (self.id, self.recipe_id)

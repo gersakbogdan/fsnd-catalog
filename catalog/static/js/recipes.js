@@ -11,14 +11,15 @@ if (typeof jQuery === 'undefined') {
     'use strict';
 
     /* Confirm category delete action */
-    $('.deleteCategoryAnchor').on('click', function (evt) {
+    $('.deleteAnchor').on('click', function (evt) {
         evt.preventDefault();
 
-        if (confirm('Are you sure you want to delete this category?')) {
+        if (confirm('Are you sure you want to delete this ' + $(this).attr('data-type') +' ?')) {
             $.post($(this).attr('href'), function (response) {
                 location.reload();
             });
         }
         return false;
     });
+
 }(jQuery);

@@ -39,6 +39,10 @@ a.category {
     color: black;
 }
 
+.recipes .page-header.first {
+    margin: 10px 0 20px;
+}
+
 /* Home Page Carousel */
 
 header.carousel {

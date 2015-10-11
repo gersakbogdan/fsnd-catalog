@@ -20,6 +20,6 @@ class RecipeForm(Form):
     cook_time = IntegerField('cook_time', validators=[Required(),NumberRange(min=1,max=300)])
     servings = IntegerField('servings', validators=[Required(),NumberRange(min=1,max=100)])
 
-    image1 = FileField('image_1', validators=[FileRequired(), FileAllowed(['jpeg', 'jpg', 'png'], 'Only images are allowed!')])
+    image1 = FileField('image_1', validators=[FileAllowed(['jpeg', 'jpg', 'png'], 'Only images are allowed!')])
     image2 = FileField('image_2', validators=[FileAllowed(['jpeg', 'jpg', 'png'], 'Only images are allowed!')])
     image3 = FileField('image_3', validators=[FileAllowed(['jpeg', 'jpg', 'png'], 'Only images are allowed!')])
