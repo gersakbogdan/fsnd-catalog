@@ -34,7 +34,7 @@
                                     <i class="fa fa-trash-o fa-fw"></i>
                                 </a>
                                 {% endif %}
-                                <a class="category" href="{{ url_for('recipes.category', category_id=category.id) }}" title="View recipes">
+                                <a class="category" href="{{ url_for('recipes.category', category_id=category.id, slug=category.slug) }}" title="View recipes">
                                     <img class="img-responsive img-category img-circle" src="{{ category.image_src }}" />
                                     <span>{{ category.name }}</span>
                                 </a>

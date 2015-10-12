@@ -26,7 +26,7 @@ def callback(provider):
 
     social_id, username, email, picture = OAuthSignIn.get_provider(provider).callback()
     if social_id is None:
-        flash(('danger','Authentication failed.'))
+        flash('Authentication failed.', 'danger')
         return redirect(url_for('general.index'))
 
     user = User.query.filter_by(social_id=social_id).first()

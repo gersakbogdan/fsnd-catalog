@@ -8,5 +8,6 @@ db = SQLAlchemy(app)
 
 lm = LoginManager(app)
 lm.login_view = 'general.index'
+lm.login_message_category = 'danger'
 
 import views

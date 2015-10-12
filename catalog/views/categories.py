@@ -28,10 +28,10 @@ def new():
         upload_category_image(form.image.data, category.id)
 
         db.session.commit()
-        flash(('success', 'Hooray! Category was successfully added!'))
+        flash('Hooray! Category was successfully added!', 'success')
     else:
         print form.errors.items()
-        flash(('danger', 'Oopss! There are some issues to fix here...'))
+        flash('Oopss! There are some issues to fix here...', 'danger')
     return render_template('categories/new.html', form=form)
 
 @mod.route('/<int:category_id>/edit/', methods=['GET', 'POST'])
@@ -46,10 +46,10 @@ def edit(category_id):
         upload_category_image(form.image.data, category.id)
         db.session.add(category)
         db.session.commit()
-        flash(('success', 'Hooray! Category was successfully added!'))
+        flash('Hooray! Category was successfully added!', 'success')
     else:
         print form.errors.items()
-        flash(('danger', 'Oopss! There are some issues to fix here...'))
+        flash('Oopss! There are some issues to fix here...', 'danger')
     return render_template('categories/edit.html', form=form, category_image=category.image_src)
 
 @mod.route('/<int:category_id>/delete/', methods=['GET', 'POST'])
@@ -60,10 +60,10 @@ def delete(category_id):
     elif current_user.is_admin:
         category = db.session.query(Category).filter_by(id=category_id).one()
         db.session.delete(category)
-        flash(('success', 'Category "%s" successfully deleted' % category.name))
+        flash('Category "%s" successfully deleted' % category.name, 'success',)
         delete_category_image(category_id)
         db.session.commit()
         return 'success'
 
-    flash(('danger', 'Oopss! It seems that you dont have the right to delete categories!'))
+    flash('Oopss! It seems that you dont have the right to delete categories!', 'danger')
     return 'error'

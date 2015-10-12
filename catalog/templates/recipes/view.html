@@ -4,7 +4,14 @@
 
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">{{ recipe.title }}</h1>
+                        <h1 class="page-header">
+                            {% if current_user.is_authenticated and current_user.id == recipe.user.id %}
+                            <a class="category" href="{{ url_for('recipes.edit', recipe_id=recipe.id) }}" title="Edit">
+                                <i class="fa fa-pencil-square-o fa-fw"></i>
+                            </a>
+                            {% endif %}
+                            {{ recipe.title }}
+                        </h1>
                     </div>
                 </div>
 
@@ -59,7 +66,21 @@
                 <div class="row">
                     <div class="col-md-12">
                         <h4>Directions</h4>
-                        <p><i>{{ recipe.directions }}</i></p>
+                        <ul class="list-unstyled ingredients">
+                            {% set step_index = 1 %}
+                            {% for step in recipe.directions.splitlines() %}
+                            {% if step %}
+                            <li>
+                                <span class="fa-stack fa-lg">
+                                  <i class="fa fa-circle fa-stack-2x"></i>
+                                  <span class="fa fa-stack-1x fa-inverse">{{ step_index }}</span>
+                                </span>
+                                {{ step }}
+                            </li>
+                            {% set step_index = step_index + 1 %}
+                            {% endif %}
+                            {% endfor %}
+                        </ul>
                     </div>
                 </div>
                 {% endblock %}

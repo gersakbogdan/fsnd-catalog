@@ -1,15 +1,15 @@
 from flask import Blueprint, render_template, redirect, url_for, session, flash
-from catalog import app
+from catalog import app, db
+from catalog.models.category import Category
+from catalog.models.recipe import Recipe
 
 mod = Blueprint('general', __name__)
 
 @mod.route('/')
 def index():
-    return render_template('general/index.html')
-
-@mod.route('/profile/')
-def profile():
-    return render_template('general/profile.html')
+    categories = db.session.query(Category).limit(6).all()
+    recipes = db.session.query(Recipe).order_by(Recipe.id.desc()).all()
+    return render_template('general/index.html', recipes=recipes, categories=categories)
 
 @app.errorhandler(404)
 def not_found(error):

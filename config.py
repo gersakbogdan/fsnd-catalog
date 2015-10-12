@@ -25,7 +25,7 @@ OAUTH_CREDENTIALS = {
 # pagination
 RECIPES_PER_PAGE = 3
 # admin users
-ADMIN = frozenset(['bogdan@gersak.ro'])
+ADMIN = frozenset(['bogdan@gersak.ro', 'gersakbogdan'])
 
 UPLOAD_FOLDER = os.path.join(basedir, 'catalog', 'static', 'upload')
 URL_UPLOAD_FOLDER = os.path.join('static', 'upload')
