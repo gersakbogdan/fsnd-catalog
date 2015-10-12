@@ -13,8 +13,12 @@ OAUTH_CREDENTIALS = {
         'secret': 'b786b0a259bd059369c5e514fd3af124'
     },
     'twitter': {
-        'id': '3RzWQclolxWZIMq5LJqzRZPTl',
-        'secret': 'm9TEd58DSEtRrZHpz2EjrV9AhsBRxKMo8m3kuIZj3zLwzwIimt'
+        'id': 'eWRZURJB2qtsSKHAdUVnirQLc',
+        'secret': 'fozPwEFZ0rYkEnF9kMCC3IhdEyJSDgwPm9a28gsPv2gSjhs8Ly'
+    },
+    'google': {
+        'id': '159773007921-1pqljrjflv1obbjsipuoa2ofrqd78g1r.apps.googleusercontent.com',
+        'secret': 'ap4Ngq5DdNsEcJ7d41wG9BKm'
     }
 }
 

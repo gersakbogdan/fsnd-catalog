@@ -1,5 +1,6 @@
-from rauth import OAuth2Service
-from flask import current_app, url_for, redirect, request
+from rauth import OAuth1Service, OAuth2Service
+from flask import current_app, url_for, redirect, request, session
+import json
 
 class OAuthSignIn(object):
     providers = None
@@ -61,5 +62,79 @@ class FacebookSignIn(OAuthSignIn):
             }
         )
 
-        me = oauth_session.get('me?fields=name,id,email').json()
-        return ('facebook$' + me['id'], me.get('name'), me.get('email'))
+        me = oauth_session.get('me?fields=name,id,email,picture').json()
+        return ('facebook$' + str(me['id']), me['name'], me['email'], me['picture']['data']['url'])
+
+class TwitterSignIn(OAuthSignIn):
+    def __init__(self):
+        super(TwitterSignIn, self).__init__('twitter')
+
+        self.service = OAuth1Service(
+            name='twitter',
+            consumer_key=self.id,
+            consumer_secret=self.secret,
+            request_token_url='https://api.twitter.com/oauth/request_token',
+            authorize_url='https://api.twitter.com/oauth/authorize',
+            access_token_url='https://api.twitter.com/oauth/access_token',
+            base_url='https://api.twitter.com/1.1/'
+        )
+
+    def authorize(self):
+        request_token = self.service.get_request_token(
+            params={'oauth_callback': self.get_callback_url()}
+        )
+        session['request_token'] = request_token
+        return redirect(self.service.get_authorize_url(request_token[0]))
+
+    def callback(self):
+        request_token = session.pop('request_token')
+
+        if 'oauth_verifier' not in request.args:
+            return None, None, None
+
+        oauth_session = self.service.get_auth_session(
+            request_token[0],
+            request_token[1],
+            data={
+                'oauth_verifier': request.args['oauth_verifier']
+            }
+        )
+
+        me = oauth_session.get('account/verify_credentials.json').json()
+        return ('twitter$' + str(me['id']), me['name'], me['screen_name'], me['profile_image_url'])
+
+class GooglePlusSignIn(OAuthSignIn):
+    def __init__(self):
+        super(GooglePlusSignIn, self).__init__('google')
+
+        self.service = OAuth2Service(
+            name='google',
+            client_id=self.id,
+            client_secret=self.secret,
+            authorize_url='https://accounts.google.com/o/oauth2/v2/auth',
+            access_token_url='https://www.googleapis.com/oauth2/v4/token',
+            base_url='https://www.googleapis.com/oauth2/v3/userinfo'
+        )
+
+    def authorize(self):
+        return redirect(self.service.get_authorize_url(
+            scope='profile email',
+            response_type='code',
+            redirect_uri=self.get_callback_url()
+        ))
+
+    def callback(self):
+        if 'code' not in request.args:
+            return None, None, None
+
+        oauth_session = self.service.get_auth_session(
+            data={
+                'code': request.args['code'],
+                'grant_type': 'authorization_code',
+                'redirect_uri': self.get_callback_url()
+            },
+            decoder=json.loads
+        )
+
+        me = oauth_session.get('').json()
+        return ('google$' + me['sub'], me['name'], me['email'], me['picture'])

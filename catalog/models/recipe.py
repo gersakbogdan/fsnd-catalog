@@ -1,5 +1,5 @@
 from catalog import db
-from catalog.helpers import slugify
+from catalog.helpers import slugify, formated_time
 from datetime import datetime
 from flask import url_for
 
@@ -47,6 +47,14 @@ class Recipe(db.Model):
                     prep_time=self.prep_time,
                     cook_time=self.cook_time,
                     servings=self.servings)
+
+    @property
+    def formated_prep_time(self):
+        return formated_time(self.prep_time)
+
+    @property
+    def formated_cook_time(self):
+        return formated_time(self.cook_time)
 
     @property
     def url(self):

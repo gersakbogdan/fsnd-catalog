@@ -24,14 +24,14 @@ def callback(provider):
     if not current_user.is_anonymous:
         return redirect(url_for('general.index'))
 
-    social_id, username, email = OAuthSignIn.get_provider(provider).callback()
+    social_id, username, email, picture = OAuthSignIn.get_provider(provider).callback()
     if social_id is None:
-        flash('Authentication failed.')
+        flash(('danger','Authentication failed.'))
         return redirect(url_for('general.index'))
 
     user = User.query.filter_by(social_id=social_id).first()
     if not user:
-        user = User(social_id, username, email, picture=None)
+        user = User(social_id, username, email, picture)
         db.session.add(user)
         db.session.commit()
 

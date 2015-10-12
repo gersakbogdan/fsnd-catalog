@@ -14,6 +14,14 @@ def slugify(text, delim=u'-'):
             result.append(word)
     return unicode(delim.join(result))
 
+def formated_time(minutes):
+    h, m = divmod(minutes, 60)
+    if h > 0 and m > 0:
+        return "%d h %d mins" % (h, m)
+    elif h > 0:
+        return "%d h" % h
+    return "%d mins" % m
+
 def upload_recipe_image(imagedata, size=(700, 450)):
     save_path = os.path.join(app.config['UPLOAD_FOLDER'], 'recipes')
 
