@@ -10,4 +10,4 @@ lm = LoginManager(app)
 lm.login_view = 'general.index'
 lm.login_message_category = 'danger'
 
-import views
+import catalog.views
