@@ -1,4 +1,5 @@
-from flask import Blueprint, render_template, flash, request, redirect, url_for
+from xmltodict import unparse
+from flask import Blueprint, render_template, flash, request, redirect, url_for, jsonify, Response
 from flask.ext.login import current_user, login_required
 
 from catalog import db
@@ -135,3 +136,14 @@ def category(category_id, slug):
         .order_by(Recipe.title.asc()).all()
 
     return render_template('recipes/by_category.html', recipes=recipes, category=category)
+
+@mod.route('.json')
+def json():
+    recipes = db.session.query(Recipe).order_by(Recipe.category_id.asc(), Recipe.title.asc())
+    return jsonify(recipes=[recipe.to_json() for recipe in recipes])
+
+@mod.route('.xml')
+def xml():
+    recipes = db.session.query(Recipe).order_by(Recipe.category_id.asc(), Recipe.title.asc())
+    xml = unparse(dict(recipes=dict(recipe=[recipe.to_json() for recipe in recipes])))
+    return Response(xml, mimetype='text/xml')

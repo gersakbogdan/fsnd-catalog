@@ -1,4 +1,5 @@
-from flask import Blueprint, render_template, flash, request, redirect, url_for
+from xmltodict import unparse
+from flask import Blueprint, render_template, flash, request, redirect, url_for, jsonify, Response
 from flask.ext.login import current_user, login_required
 
 from catalog import db
@@ -67,3 +68,14 @@ def delete(category_id):
 
     flash('Oopss! It seems that you dont have the right to delete categories!', 'danger')
     return 'error'
+
+@mod.route('.json')
+def json():
+    categories = db.session.query(Category).order_by(Category.name)
+    return jsonify(categories=[category.to_json() for category in categories])
+
+@mod.route('.xml')
+def xml():
+    categories = db.session.query(Category).order_by(Category.name)
+    xml = unparse(dict(categories=dict(category=[category.to_json() for category in categories])))
+    return Response(xml, mimetype='text/xml')
