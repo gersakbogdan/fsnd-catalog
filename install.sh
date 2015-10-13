@@ -5,3 +5,4 @@ flask/bin/pip install sqlalchemy-migrate
 flask/bin/pip install flask-wtf
 flask/bin/pip install rauth
 flask/bin/pip install Pillow
+flask/bin/pip install pylint

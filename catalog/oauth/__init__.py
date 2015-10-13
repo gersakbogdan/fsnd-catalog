@@ -1,6 +1,7 @@
+import json
+
 from rauth import OAuth1Service, OAuth2Service
 from flask import current_app, url_for, redirect, request, session
-import json
 
 class OAuthSignIn(object):
     providers = None

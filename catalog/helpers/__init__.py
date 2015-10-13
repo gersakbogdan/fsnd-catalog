@@ -1,7 +1,9 @@
 import os, re, uuid
-from catalog import app
-from PIL import Image, ImageOps
+
 from unicodedata import normalize
+from PIL import Image, ImageOps
+
+from catalog import app
 
 _punct_re = re.compile(r'[\t !"#$%&\'()*\-/<=>?@\[\\\]^_`{|},.]+')
 
