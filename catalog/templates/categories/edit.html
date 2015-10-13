@@ -12,13 +12,13 @@
                     <form name="editCategoryForm" id="editCategoryForm" method="post" enctype="multipart/form-data" novalidate>
                         {{ form.csrf_token }}
                         <div class="col-md-8">
-                            <div class="control-group form-group">
+                            <div class="control-group form-group{% if form.name.errors|length%} has-error{% endif %}">
                                 <div class="controls">
                                     <label>Name:</label>
                                     {{ form.name(class='form-control', required=true, maxlength=20, **{'data-validation-required-message':'Please enter category title'}) }}
                                 </div>
                             </div>
-                            <div class="control-group form-group">
+                            <div class="control-group form-group{% if form.description.errors|length%} has-error{% endif %}">
                                 <div class="controls">
                                     <label>Description:</label>
                                     {{ form.description(rows=3, cols=100, class='form-control', required=true, maxlength=500, **{'data-validation-required-message':'Please enter a description'}) }}
@@ -26,7 +26,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-10">
-                                    <div class="control-group form-group">
+                                    <div class="control-group form-group{% if form.image.errors|length%} has-error{% endif %}">
                                         <div class="controls">
                                             <label>Image:</label>
                                             {{ form.image(class='form-control') }}

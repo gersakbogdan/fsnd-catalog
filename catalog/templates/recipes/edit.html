@@ -12,31 +12,31 @@
                     <div class="row">
                         {{ form.csrf_token }}
                         <div class="col-md-8">
-                            <div class="control-group form-group">
+                            <div class="control-group form-group{% if form.category.errors|length%} has-error{% endif %}">
                                 <div class="controls">
                                     <label>Category:</label>
                                     {{ form.category(class='form-control', **{'data-validation-required-message':'Please select category'}) }}
                                 </div>
                             </div>
-                            <div class="control-group form-group">
+                            <div class="control-group form-group{% if form.name.errors|length%} has-error{% endif %}">
                                 <div class="controls">
                                     <label>Title:</label>
                                     {{ form.title(class='form-control', required=true, maxlength=200, **{'data-validation-required-message':'Please enter recipe title'}) }}
                                 </div>
                             </div>
-                            <div class="control-group form-group">
+                            <div class="control-group form-group{% if form.description.errors|length%} has-error{% endif %}">
                                 <div class="controls">
                                     <label>Description:</label>
                                     {{ form.description(rows=3, cols=100, class='form-control', required=true, maxlength=500, **{'data-validation-required-message':'Please enter a description'}) }}
                                 </div>
                             </div>
-                            <div class="control-group form-group">
+                            <div class="control-group form-group{% if form.ingredients.errors|length%} has-error{% endif %}">
                                 <div class="controls">
                                     <label>Ingredients:</label>
                                     {{ form.ingredients(rows=7, cols=100, class='form-control', required=true, maxlength=4000, placeholder='Put each ingredient on its own line.', **{'data-validation-required-message':'Please add some ingredients'}) }}
                                 </div>
                             </div>
-                            <div class="control-group form-group">
+                            <div class="control-group form-group{% if form.directions.errors|length%} has-error{% endif %}">
                                 <div class="controls">
                                     <label>Directions:</label>
                                     {{ form.directions(rows=7, cols=100, class='form-control', required=true, maxlength=4000, placeholder='Put each step on its own line.', **{'data-validation-required-message':'Please enter directions'}) }}
@@ -47,7 +47,7 @@
                         <div class="col-md-4">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="control-group form-group">
+                                    <div class="control-group form-group{% if form.prep_time.errors|length%} has-error{% endif %}">
                                         <div class="controls">
                                             <label>Prep time:</label>
                                             {{ form.prep_time(class='form-control', required=true, **{'data-validation-required-message':'Please add preparation time'}) }}
@@ -56,7 +56,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="control-group form-group">
+                                    <div class="control-group form-group{% if form.cook_time.errors|length%} has-error{% endif %}">
                                         <div class="controls">
                                             <label>Cook time:</label>
                                             {{ form.cook_time(class='form-control', required=true, **{'data-validation-required-message':'Please add cook time'}) }}
@@ -67,7 +67,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="control-group form-group">
+                                    <div class="control-group form-group{% if form.servings.errors|length%} has-error{% endif %}">
                                         <div class="controls">
                                             <label>Number of servings:</label>
                                             {{ form.servings(class='form-control', required=true, **{'data-validation-required-message':'Please add number of servings'}) }}
@@ -94,7 +94,7 @@
 
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="control-group form-group">
+                                    <div class="control-group form-group{% if form.image1.errors|length%} has-error{% endif %}">
                                         <div class="controls">
                                             <label>Image:</label>
                                             {{ form.image1(class='form-control') }}
