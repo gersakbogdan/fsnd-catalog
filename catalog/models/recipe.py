@@ -1,8 +1,9 @@
+from urlparse import urljoin
+from datetime import datetime
+from flask import url_for, request
+
 from catalog import db
 from catalog.helpers import slugify, formated_time
-from datetime import datetime
-from flask import url_for
-
 from config import URL_UPLOAD_FOLDER
 
 class Recipe(db.Model):
@@ -40,13 +41,17 @@ class Recipe(db.Model):
         self.pub_date = pub_date
 
     def to_json(self):
-        return dict(id=self.id,
-                    title=self.title,
-                    ingredients=self.ingredients,
-                    directions=self.directions,
-                    prep_time=self.prep_time,
-                    cook_time=self.cook_time,
-                    servings=self.servings)
+        return dict(
+            id=self.id,
+            category=dict(id=self.category_id, name=self.category.name),
+            title=self.title,
+            ingredients=self.ingredients,
+            directions=self.directions,
+            prep_time=self.prep_time,
+            cook_time=self.cook_time,
+            servings=self.servings,
+            images=[image.to_json() for image in self.images]
+        )
 
     @property
     def formated_prep_time(self):
@@ -88,6 +93,9 @@ class RecipeImage(db.Model):
         self.recipe = recipe
         self.filename = filename
         self.hidden = hidden
+
+    def to_json(self):
+        return dict(src=urljoin(request.url_root, self.src))
 
     @property
     def src(self):

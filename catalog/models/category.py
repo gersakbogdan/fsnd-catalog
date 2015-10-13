@@ -1,11 +1,12 @@
+from datetime import datetime
+from urlparse import urljoin
+
+from flask import url_for, request
+from werkzeug import cached_property
+
 from catalog import app, db
 from catalog.helpers import slugify
-from datetime import datetime
-
 from config import URL_UPLOAD_FOLDER
-
-from werkzeug import cached_property
-from flask import url_for
 
 class Category(db.Model):
     __tablename__ = 'category'
@@ -19,7 +20,13 @@ class Category(db.Model):
         self.description = description
 
     def to_json(self):
-        return dict(name=self.name, description=self.description)
+        return dict(
+            id=self.id,
+            name=self.name,
+            description=self.description,
+            image=urljoin(request.url_root, self.image_src),
+            recipes=[recipe.to_json() for recipe in self.recipes]
+        )
 
     @cached_property
     def count(self):
