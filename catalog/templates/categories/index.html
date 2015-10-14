@@ -30,7 +30,7 @@
                                 <a class="category" href="{{ url_for('categories.edit', category_id=category.id) }}" title="Edit">
                                     <i class="fa fa-pencil-square-o fa-fw"></i>
                                 </a>
-                                <a class="category deleteAnchor" href="{{ url_for('categories.delete', category_id=category.id) }}" data-type="category" title="Delete">
+                                <a class="category deleteAnchor" href="{{ url_for('categories.delete', category_id=category.id) }}" data-type="category" data-csrf="{{ csrf_token() }}" title="Delete">
                                     <i class="fa fa-trash-o fa-fw"></i>
                                 </a>
                                 {% endif %}

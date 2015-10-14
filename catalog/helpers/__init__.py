@@ -2,6 +2,7 @@ import os, re, uuid
 
 from unicodedata import normalize
 from PIL import Image, ImageOps
+from flask import request, session, abort
 
 from catalog import app
 
@@ -19,10 +20,10 @@ def slugify(text, delim=u'-'):
 def formated_time(minutes):
     h, m = divmod(minutes, 60)
     if h > 0 and m > 0:
-        return "%d h %d mins" % (h, m)
+        return '%d h %d mins' % (h, m)
     elif h > 0:
-        return "%d h" % h
-    return "%d mins" % m
+        return '%d h' % h
+    return '%d mins' % m
 
 def upload_recipe_image(imagedata, size=(700, 450)):
     save_path = os.path.join(app.config['UPLOAD_FOLDER'], 'recipes')
@@ -60,3 +61,17 @@ def delete_category_image(category_id):
         os.remove(file_path)
     except OSError:
         pass
+
+def csrf_protect():
+    if request.method == "POST":
+        token = session.pop('_csrf_token', None)
+        print token, request.form.get('_csrf_token')
+        if not token or str(token) != str(request.form.get('_csrf_token')):
+            abort(403)
+
+def generate_csrf_token():
+    if '_csrf_token' not in session:
+        session['_csrf_token'] = uuid.uuid4()
+    return session['_csrf_token']
+
+app.jinja_env.globals['csrf_token'] = generate_csrf_token

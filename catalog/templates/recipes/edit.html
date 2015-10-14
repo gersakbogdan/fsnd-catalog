@@ -18,7 +18,7 @@
                                     {{ form.category(class='form-control', **{'data-validation-required-message':'Please select category'}) }}
                                 </div>
                             </div>
-                            <div class="control-group form-group{% if form.name.errors|length%} has-error{% endif %}">
+                            <div class="control-group form-group{% if form.title.errors|length%} has-error{% endif %}">
                                 <div class="controls">
                                     <label>Title:</label>
                                     {{ form.title(class='form-control', required=true, maxlength=200, **{'data-validation-required-message':'Please enter recipe title'}) }}
@@ -83,7 +83,7 @@
                                     <div class="panel text-center">
                                         <div class="panel-heading">
                                             <img class="img-responsive img-rounded img-category" src="{{ image.src }}" />
-                                            <a class="category deleteAnchor" href="{{ url_for('recipes.delete_image', recipe_id=recipe_id, image_id=image.id) }}" data-type="recipe" title="Delete">
+                                            <a class="category deleteAnchor" href="{{ url_for('recipes.delete_image', recipe_id=recipe_id, image_id=image.id) }}" data-type="image" data-csrf="{{ csrf_token() }}" title="Delete">
                                                 <i class="fa fa-trash-o fa-fw"></i>
                                             </a>
                                         </div>

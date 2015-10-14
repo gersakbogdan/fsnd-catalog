@@ -6,7 +6,7 @@ from catalog import db
 from catalog.forms.recipe import RecipeForm
 from catalog.models.category import Category
 from catalog.models.recipe import Recipe, RecipeImage
-from catalog.helpers import upload_recipe_image
+from catalog.helpers import upload_recipe_image, csrf_protect
 
 mod = Blueprint('recipes', __name__, url_prefix='/recipes')
 
@@ -101,6 +101,7 @@ def delete(recipe_id):
     if request.method == 'GET':
         return redirect(url_fo('recipes.index'))
 
+    csrf_protect() # csrf protection
     recipe = db.session.query(Recipe).filter_by(id=recipe_id).one()
     if recipe.user.id == current_user.id:
         db.session.delete(recipe)
@@ -117,6 +118,7 @@ def delete_image(recipe_id, image_id):
     if request.method == 'GET':
         return redirect(url_fo('recipes.index'))
 
+    csrf_protect() # csrf protection
     recipe = db.session.query(Recipe).filter_by(id=recipe_id).one()
     if recipe.user.id == current_user.id:
         image = db.session.query(RecipeImage).filter_by(id=image_id).one()

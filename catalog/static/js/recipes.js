@@ -15,8 +15,11 @@ if (typeof jQuery === 'undefined') {
         evt.preventDefault();
 
         if (confirm('Are you sure you want to delete this ' + $(this).attr('data-type') +' ?')) {
-            $.post($(this).attr('href'), function (response) {
+            $.post($(this).attr('href'), {_csrf_token: $(this).attr('data-csrf')}, function (response) {
                 location.reload();
+            }).error(function () {
+                // csrf error
+                alert('An error occured, please try again later!');
             });
         }
         return false;

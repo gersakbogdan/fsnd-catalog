@@ -5,7 +5,7 @@ from flask.ext.login import current_user, login_required
 from catalog import db
 from catalog.forms.category import CategoryForm
 from catalog.models.category import Category
-from catalog.helpers import upload_category_image, delete_category_image
+from catalog.helpers import upload_category_image, delete_category_image, csrf_protect
 
 mod = Blueprint('categories', __name__, url_prefix='/categories')
 
@@ -59,6 +59,7 @@ def delete(category_id):
     if request.method == 'GET':
         return redirect(url_for('categories.index'))
     elif current_user.is_admin:
+        csrf_protect() # csrf protection
         category = db.session.query(Category).filter_by(id=category_id).one()
         db.session.delete(category)
         flash('Category "%s" successfully deleted' % category.name, 'success',)
