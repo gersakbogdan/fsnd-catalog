@@ -1,9 +1,10 @@
 from urlparse import urljoin
 from datetime import datetime
 from flask import url_for, request
+from sqlalchemy import event
 
 from catalog import db
-from catalog.helpers import slugify, formated_time
+from catalog.helpers import slugify, formated_time, delete_recipe_image
 from config import URL_UPLOAD_FOLDER
 
 class Recipe(db.Model):
@@ -87,7 +88,7 @@ class RecipeImage(db.Model):
     filename = db.Column(db.String(250), nullable=False)
     hidden = db.Column(db.Boolean, nullable=False)
 
-    recipe = db.relationship('Recipe', backref=db.backref('images', lazy='dynamic'))
+    recipe = db.relationship('Recipe', backref=db.backref('images', cascade='delete, delete-orphan', lazy='dynamic'))
 
     def __init__(self, recipe, filename, hidden=False):
         self.recipe = recipe
@@ -101,5 +102,12 @@ class RecipeImage(db.Model):
     def src(self):
         return '/%s/recipes/%s' % (URL_UPLOAD_FOLDER, self.filename)
 
+    @staticmethod
+    def cb_delete_filename(mapper, connection, target):
+        delete_recipe_image(target.filename)
+
     def __repr__(self):
         return '<Image %r %r>' % (self.id, self.recipe_id)
+
+# delete filename from disk when 'after_delete' event is triggered
+event.listen(RecipeImage, 'after_delete', RecipeImage.cb_delete_filename)

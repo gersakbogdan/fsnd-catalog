@@ -27,13 +27,7 @@ def formated_time(minutes):
 
 def upload_recipe_image(imagedata, size=(700, 450)):
     save_path = os.path.join(app.config['UPLOAD_FOLDER'], 'recipes')
-
-    filename = upload_image(imagedata, save_path, size)
-    if filename:
-        thumb_path = os.path.join(save_path, 'thumb')
-        upload_image(imagedata, thumb_path, (128, 128))
-
-    return filename
+    return upload_image(imagedata, save_path, size)
 
 def upload_category_image(imagedata, category_id):
     filename = '%s.%s' % (category_id, 'png')
@@ -58,6 +52,13 @@ def delete_category_image(category_id):
     try:
         filename = '%s.%s' % (category_id, 'png')
         file_path = os.path.join(app.config['UPLOAD_FOLDER'], 'categories', filename)
+        os.remove(file_path)
+    except OSError:
+        pass
+
+def delete_recipe_image(filename):
+    try:
+        file_path = os.path.join(app.config['UPLOAD_FOLDER'], 'recipes', filename)
         os.remove(file_path)
     except OSError:
         pass
