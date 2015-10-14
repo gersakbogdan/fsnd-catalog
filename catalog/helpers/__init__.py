@@ -18,6 +18,8 @@ def slugify(text, delim=u'-'):
     return unicode(delim.join(result))
 
 def formated_time(minutes):
+    """Convert integer to hours and minutes format."""
+
     h, m = divmod(minutes, 60)
     if h > 0 and m > 0:
         return '%d h %d mins' % (h, m)
@@ -26,10 +28,14 @@ def formated_time(minutes):
     return '%d mins' % m
 
 def upload_recipe_image(imagedata, size=(700, 450)):
+    """Save and resize recipe image."""
+
     save_path = os.path.join(app.config['UPLOAD_FOLDER'], 'recipes')
     return upload_image(imagedata, save_path, size)
 
 def upload_category_image(imagedata, category_id):
+    """Save and resize to (128,128) the uploaded category image."""
+
     filename = '%s.%s' % (category_id, 'png')
     file_path = os.path.join(app.config['UPLOAD_FOLDER'], 'categories', filename)
 

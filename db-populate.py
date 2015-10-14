@@ -1,5 +1,6 @@
 #!flask/bin/python
 # -*- coding: utf-8 -*-
+
 from catalog import db
 from catalog.models.user import User
 from catalog.models.category import Category

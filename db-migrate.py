@@ -1,4 +1,8 @@
 #!flask/bin/python
+
+# Create database migration
+# Reference: http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-iv-database
+
 import imp
 from migrate.versioning import api
 from catalog import db

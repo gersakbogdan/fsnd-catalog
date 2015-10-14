@@ -1,6 +1,7 @@
 from xmltodict import unparse
 from flask import Blueprint, render_template, flash, request, redirect, url_for, jsonify, Response
 from flask.ext.login import current_user, login_required
+from sqlalchemy.orm import exc
 
 from catalog import db
 from catalog.forms.category import CategoryForm
@@ -11,12 +12,24 @@ mod = Blueprint('categories', __name__, url_prefix='/categories')
 
 @mod.route('/')
 def index():
+    """Categories main index page.
+
+    Displays the list of categories ordered by name.
+    """
+
     categories = db.session.query(Category).order_by(Category.name)
     return render_template('categories/index.html', categories=categories)
 
 @mod.route('/new/', methods=['GET', 'POST'])
 @login_required
 def new():
+    """Create new category page.
+
+    Displays the form to create a new category. If the form is successfully
+    submitted an success message is shown.
+    This page can be accessed only by logged in users.
+    """
+
     form = CategoryForm()
     if request.method == 'GET':
         pass
@@ -36,8 +49,23 @@ def new():
     return render_template('categories/new.html', form=form)
 
 @mod.route('/<int:category_id>/edit/', methods=['GET', 'POST'])
+@login_required
 def edit(category_id):
-    category = db.session.query(Category).filter_by(id=category_id).one()
+    """Category edit page.
+
+    Displays the form to edit a category.
+    This page can be accessed only by logged in users.
+
+    Args:
+        category_id: The category id to be edit
+    """
+
+    try:
+        category = db.session.query(Category).filter_by(id=category_id).one()
+    except:
+        flash('Oopss! Category does not exists!', 'danger')
+        return redirect(url_for('categories.index'))
+
     form = CategoryForm(obj=category)
     if request.method == 'GET':
         pass
@@ -56,15 +84,33 @@ def edit(category_id):
 @mod.route('/<int:category_id>/delete/', methods=['GET', 'POST'])
 @login_required
 def delete(category_id):
+    """Delete category handler.
+
+    Deletes the category from the database if exists. All the associated recipes and images
+    will also be deleted.
+    This page can be accessed only by logged in users and CSRF check runs for each delete.
+
+    Args:
+        category_id: The category id to be deleted
+    """
+
     if request.method == 'GET':
         return redirect(url_for('categories.index'))
     elif current_user.is_admin:
         csrf_protect() # csrf protection
-        category = db.session.query(Category).filter_by(id=category_id).one()
-        db.session.delete(category)
-        flash('Category "%s" successfully deleted' % category.name, 'success',)
-        delete_category_image(category_id)
-        db.session.commit()
+        try:
+            category = db.session.query(Category).filter_by(id=category_id).one()
+            db.session.delete(category)
+            flash('Category "%s" successfully deleted' % category.name, 'success',)
+            delete_category_image(category_id)
+            db.session.commit()
+        except exc.NoResultFound:
+            flash('Category does not exists!', 'danger')
+            return 'error'
+        except:
+            flash('An error occurred, please try again later!')
+            return 'error'
+
         return 'success'
 
     flash('Oopss! It seems that you dont have the right to delete categories!', 'danger')
@@ -72,11 +118,15 @@ def delete(category_id):
 
 @mod.route('.json')
 def json():
+    """Categories list in JSON format."""
+
     categories = db.session.query(Category).order_by(Category.name)
     return jsonify(categories=[category.to_json() for category in categories])
 
 @mod.route('.xml')
 def xml():
+    """Categories list in XML format."""
+
     categories = db.session.query(Category).order_by(Category.name)
     xml = unparse(dict(categories=dict(category=[category.to_json() for category in categories])))
     return Response(xml, mimetype='text/xml')
