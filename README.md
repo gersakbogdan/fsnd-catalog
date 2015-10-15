@@ -1,4 +1,4 @@
-## Udacity FSND -  Catalog Project
+## Udacity FSND -  P3 Item Catalog
 Udacity Full Stack Web Developer Nanodegree P3 Item Catalog Project
 
 ### Recipes catalog features:
@@ -8,7 +8,6 @@ Udacity Full Stack Web Developer Nanodegree P3 Item Catalog Project
 * Add/Delete categories images
 * Add/Delete recipes images
 * Export categories or recipes to JSON or XML format
-
 
 ### Requirements
 * [Python](https://www.python.org/)
@@ -30,14 +29,14 @@ Udacity Full Stack Web Developer Nanodegree P3 Item Catalog Project
     * ```$ ./install.py```
 * Create database
     * ```$ ./db-create.py```
-* Populate database (add some categories and recipes)
+* Add test data
     * ```$ ./db-populate.py```
-
-### Usage
-```bash
-$ ./run.py
-```
-
+* Setup OAuth Credentials
+    * Open config.py and update ```OAUTH_CREDENTIALS``` with Facebook, Twitter and Google+ oauth details
+* Run
+    * ```$ ./run.py```
+* View/Use
+    * Open in your favourite browser: ```http://localhost:8000```
 
 ### Screenshots
     ....
@@ -53,21 +52,3 @@ $ ./run.py
     * [Facebook](https://developers.facebook.com/docs/facebook-login/manually-build-a-login-flow)
     * [Twitter](https://dev.twitter.com/oauth)
     * [Google+](https://developers.google.com/+/web/api/rest/oauth)
-
-$ virtualenv flask
-
-$ chmod a+x install.sh
-
-$ ./install.sh
-
-$ chmod a+x db-create.py
-
-$ ./db-create.py
-
-$ chmod a+x server.py
-
-$ ./db-populate.py
-
-$ ./run.py
-
-Open: http://localhost:8000
