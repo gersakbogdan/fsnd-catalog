@@ -12,7 +12,7 @@ def index():
     Displays the list of popular categories and latest recipes.
     """
 
-    recipes = db.session.query(Recipe).order_by(Recipe.id.desc()).limit(10).all()
+    recipes = db.session.query(Recipe).order_by(Recipe.id.desc()).limit(8).all()
     categories = db.session.query(Category).limit(6).all()
     return render_template('general/index.html', recipes=recipes, categories=categories)
 

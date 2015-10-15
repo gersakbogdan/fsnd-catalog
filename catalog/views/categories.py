@@ -17,7 +17,7 @@ def index():
     Displays the list of categories ordered by name.
     """
 
-    categories = db.session.query(Category).order_by(Category.name)
+    categories = db.session.query(Category).order_by(Category.name).all()
     return render_template('categories/index.html', categories=categories)
 
 @mod.route('/new/', methods=['GET', 'POST'])
