@@ -121,12 +121,12 @@ def json():
     """Categories list in JSON format."""
 
     categories = db.session.query(Category).order_by(Category.name)
-    return jsonify(categories=[category.to_json() for category in categories])
+    return jsonify(categories=[category.to_dict() for category in categories])
 
 @mod.route('.xml')
 def xml():
     """Categories list in XML format."""
 
     categories = db.session.query(Category).order_by(Category.name)
-    xml = unparse(dict(categories=dict(category=[category.to_json() for category in categories])))
+    xml = unparse(dict(categories=dict(category=[category.to_dict() for category in categories])))
     return Response(xml, mimetype='text/xml')

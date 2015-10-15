@@ -10,6 +10,8 @@ def categories():
     return Category.query.order_by(Category.name)
 
 class RecipeForm(Form):
+    """Basic form which allows to add or to edit a recipe."""
+
     category = QuerySelectField('category_id', query_factory=categories, get_label='name', allow_blank=True, blank_text=u'Choose category', validators=[Required()])
     title = StringField('title', validators=[Required(), Length(min=1, max=200)])
     description = TextAreaField('description', validators=[Required(), Length(min=1, max=500)])

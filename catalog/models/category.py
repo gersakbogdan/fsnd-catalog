@@ -9,6 +9,11 @@ from catalog.helpers import slugify
 from config import URL_UPLOAD_FOLDER
 
 class Category(db.Model):
+    """"Category model class.
+
+    This class represents one category. Each category has a name, a description and one image. All fields are required.
+    """
+
     __tablename__ = 'category'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -19,22 +24,20 @@ class Category(db.Model):
         self.name = name
         self.description = description
 
-    def to_json(self):
+    def to_dict(self):
+        """Converts recipe to dictionary."""
+
         return dict(
             id=self.id,
             name=self.name,
             description=self.description,
             image=urljoin(request.url_root, self.image_src),
-            recipes=[recipe.to_json() for recipe in self.recipes]
+            recipes=[recipe.to_dict() for recipe in self.recipes]
         )
 
     @cached_property
     def count(self):
         return self.recipes.count()
-
-    @property
-    def url(self):
-        return url_for('recipes.category', id=self.id)
 
     @property
     def slug(self):

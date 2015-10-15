@@ -225,11 +225,11 @@ def category(category_id, slug):
 def json():
     """Recipes list in JSON format."""
     recipes = db.session.query(Recipe).order_by(Recipe.category_id.asc(), Recipe.title.asc())
-    return jsonify(recipes=[recipe.to_json() for recipe in recipes])
+    return jsonify(recipes=[recipe.to_dict() for recipe in recipes])
 
 @mod.route('.xml')
 def xml():
     """Recipes list in XML format."""
     recipes = db.session.query(Recipe).order_by(Recipe.category_id.asc(), Recipe.title.asc())
-    xml = unparse(dict(recipes=dict(recipe=[recipe.to_json() for recipe in recipes])))
+    xml = unparse(dict(recipes=dict(recipe=[recipe.to_dict() for recipe in recipes])))
     return Response(xml, mimetype='text/xml')

@@ -4,6 +4,8 @@ from wtforms import StringField, TextAreaField
 from wtforms.validators import Required, Length
 
 class CategoryForm(Form):
+    """Basic form which allows to add or to edit a category."""
+
     name = StringField('name', validators=[Required(), Length(min=1, max=20)])
     description = TextAreaField('description', validators=[Required(), Length(min=1, max=500)])
     image = FileField('image', validators=[FileAllowed(['jpeg', 'jpg', 'png'], 'Only images are allowed!')])

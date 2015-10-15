@@ -8,6 +8,13 @@ from catalog.helpers import slugify, formated_time, delete_recipe_image
 from config import URL_UPLOAD_FOLDER
 
 class Recipe(db.Model):
+    """Recipe model class.
+
+    This class represents one recipe. Each recipe has an user id, category id, title, description, ingredients,
+    preparation time, cook time, servings and a publish date. All fields are required.
+    Two many to one relations are established between Recipe and Category and between Recipe and User tables.
+    """
+
     __tablename__ = 'recipe'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -41,7 +48,9 @@ class Recipe(db.Model):
             pub_date = datetime.utcnow()
         self.pub_date = pub_date
 
-    def to_json(self):
+    def to_dict(self):
+        """Converts recipe to dictionary."""
+
         return dict(
             id=self.id,
             category=dict(id=self.category_id, name=self.category.name),
@@ -51,7 +60,7 @@ class Recipe(db.Model):
             prep_time=self.prep_time,
             cook_time=self.cook_time,
             servings=self.servings,
-            images=[image.to_json() for image in self.images]
+            images=[image.to_dict() for image in self.images]
         )
 
     @property
@@ -72,6 +81,8 @@ class Recipe(db.Model):
 
     @property
     def image_src(self):
+        """Returns main recipe image. If none returns default image set for recipes."""
+
         if self.images.count() > 0 and self.images[0].filename:
             return '/%s/recipes/%s' % (URL_UPLOAD_FOLDER, self.images[0].filename)
         return '/static/images/no-image.png'
@@ -81,6 +92,13 @@ class Recipe(db.Model):
 
 
 class RecipeImage(db.Model):
+    """"Recipe images model class.
+
+    This class create the 'recipe_image' table. Each row will have an id, a recipe_id, a filename and a hidden column.
+    All fields are required.
+
+    A many to one relationship is established between this table and Recipe table.
+    """
     __tablename__ = 'recipe_image'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -95,7 +113,7 @@ class RecipeImage(db.Model):
         self.filename = filename
         self.hidden = hidden
 
-    def to_json(self):
+    def to_dict(self):
         return dict(src=urljoin(request.url_root, self.src))
 
     @property

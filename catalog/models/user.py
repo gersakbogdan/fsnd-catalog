@@ -3,12 +3,17 @@ from datetime import datetime
 from flask.ext.login import UserMixin
 
 class User(UserMixin, db.Model):
+    """User model class.
+
+    This class represents the 'user' table.
+    Each row will have an id,social_id, name , email, picture and last seen column.
+    """
     __tablename__ = 'user'
 
     id = db.Column(db.Integer, primary_key=True)
     social_id = db.Column(db.String(64), nullable=False, unique=True)
     name = db.Column(db.String(250), nullable=False)
-    email = db.Column(db.String(250), nullable=True)
+    email = db.Column(db.String(250), nullable=False)
     picture = db.Column(db.String(250))
     last_seen = db.Column(db.DateTime)
 
@@ -21,6 +26,8 @@ class User(UserMixin, db.Model):
 
     @property
     def is_admin(self):
+        """Check if user has admin rights."""
+
         return self.email in app.config['ADMIN']
 
     def __eq__(self, other):
