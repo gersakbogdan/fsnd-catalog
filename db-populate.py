@@ -6,7 +6,7 @@ from catalog.models.user import User
 from catalog.models.category import Category
 from catalog.models.recipe import Recipe, RecipeImage
 
-user = User('facebook$10206593265223852', 'Bogdan Gersak', 'bogdan@gersak.ro', None)
+user = User('facebook$10206593265223852', 'John Doe', 'example@email.dom', None)
 db.session.add(user)
 appetizer = Category('Appetizer', 'Appetizers and Snacks')
 db.session.add(appetizer)
@@ -43,12 +43,12 @@ appetizer_recipe_1 = Recipe(
     1 (12-oz.) French bread baguette, cut into 15 to 20 (1/2-inch-thick) slices\
     3 tablespoons butter, softened\r\n2 ounces crumbled blue cheese, softened\r\n1/3 cup chopped toasted pecans\
     Garnish: chopped fresh thyme',
-    u'Preheat oven to 425F. Toss together first 6 ingredients.\
-    Arrange grapes in a single layer in a small roasting pan; \
-    bake 15 to 20 minutes or until grapes wilt and liquid forms a thin syrup. \
-    Remove from oven.2. Increase oven temperature to broil with oven rack 7 inches from heat. \
-    Arrange bread slices in a single layer on a baking sheet. Stir together butter and cheese, and \
-    spread evenly over bread slices. Broil 2 to 3 minutes or until browned and bubbly. \
+    u'Preheat oven to 425F. Toss together first 6 ingredients.\r\n\
+    Arrange grapes in a single layer in a small roasting pan;\r\n\
+    bake 15 to 20 minutes or until grapes wilt and liquid forms a thin syrup.\r\n\
+    Remove from oven.2. Increase oven temperature to broil with oven rack 7 inches from heat.\r\n\
+    Arrange bread slices in a single layer on a baking sheet. Stir together butter and cheese, and\r\n\
+    spread evenly over bread slices. Broil 2 to 3 minutes or until browned and bubbly.\r\n\
     Spoon grape mixture over toasted bread, and sprinkle with pecans.',
     20,
     15,
@@ -62,18 +62,18 @@ appetizer_recipe_2 = Recipe(
     u'Phyllo-Wrapped Asparagus with Prosciutto',
     u'Phyllo-Wrapped Asparagus with Prosciutto is an appetizer worthy of a special occasion. Simply roll up prosciutto and asparagus in phyllo dough and bake. The results are a crunchy, easy appetizer all will enjoy. You can also chop the prosciutto and sprinkle it on the phyllo.',
 
-    u'3 ounces thinly sliced prosciutto, cut into 30 long, thin strips\
-     30 asparagus spears, trimmed\
-     10 (14 x 9-inch) sheets frozen phyllo dough, thawed\
+    u'3 ounces thinly sliced prosciutto, cut into 30 long, thin strips\r\n\
+     30 asparagus spears, trimmed\r\n\
+     10 (14 x 9-inch) sheets frozen phyllo dough, thawed\r\n\
      Cooking spray',
 
-    u'Preheat oven to 450C \
-     Wrap 1 prosciutto strip around each asparagus spear, barber polestyle. \
-     Place 1 phyllo sheet on a work surface (cover remaining phyllo to prevent drying); \
-     coat phyllo with cooking spray. Cut crosswise into thirds to form 3 (4 1/2 x 9inch) rectangles. \
-     Arrange 1 asparagus spear across 1 short end of each rectangle; roll up jelly-roll fashion. \
-     Arrange rolls on a baking sheet; coat rolls with cooking spray. Repeat procedure with remaining phyllo, \
-     asparagus, and cooking spray. Bake at 450C for 10 minutes or until phyllo is golden and crisp. \
+    u'Preheat oven to 450C\r\n\
+     Wrap 1 prosciutto strip around each asparagus spear, barber polestyle.\r\n\
+     Place 1 phyllo sheet on a work surface (cover remaining phyllo to prevent drying);\r\n\
+     coat phyllo with cooking spray. Cut crosswise into thirds to form 3 (4 1/2 x 9inch) rectangles.\r\n\
+     Arrange 1 asparagus spear across 1 short end of each rectangle; roll up jelly-roll fashion.\r\n\
+     Arrange rolls on a baking sheet; coat rolls with cooking spray. Repeat procedure with remaining phyllo,\r\n\
+     asparagus, and cooking spray. Bake at 450C for 10 minutes or until phyllo is golden and crisp.\r\n\
      Serve warm or at room temperature.',
     20,
     25,
@@ -99,5 +99,119 @@ bbq_recipe_1 = Recipe(
     8
 )
 db.session.add(bbq_recipe_1)
+
+breakfast_recipe_1 = Recipe(
+    user,
+    breakfast,
+    u'Baked eggs in popped beans',
+    u'Mighty cannellini beans are a great source of protein, high in fibre, and contain vitamin C as well as magnesium, a mineral that helps our muscles to function properly',
+    u'250g mixed-colour ripe cherry tomatoes\r\n\
+    1/2 a lemon\r\n\
+    extra virgin olive oil\r\n\
+    4 sprigs of fresh basil\r\n\
+    1x400g tin of cannellini beans\r\n\
+    1 good pinch of fennel seeds\r\n\
+    2 large free-range eggs\r\n\
+    2 slices of seeded wholemeal bread\r\n\
+    2 heaped teaspoons ricotta cheese\r\n\
+    thick balsamic vinegar, optional\r\n\
+    hot chilli sauce, optional',
+    u'Halve the tomatoes, place in a bowl and toss with the lemon juice, 1 tablespoon of oil and a pinch of sea salt. Pick, tear and toss in the basil leaves (reserving the smaller ones for garnish), then leave aside to macerate for a few minutes.\r\n\
+    Meanwhile, place a large non-stick frying pan on a high heat. Drain the beans and put into the hot pan with the fennel seeds and a pinch of black pepper. Leave for 5 minutes, shaking occasionally – you want them to char and pop open, bursting their skins. Pour the macerated tomatoes into the pan with 100ml of water, season, then leave to bubble away vigorously for 1 minute. Crack in an egg on each side, then cover with a lid, plate or tin foil, reduce to a medium-low heat and slow-cook for 3 to 4 minutes for nice soft eggs, or longer if you prefer. Meanwhile, toast the bread.\r\n\
+    Divide the ricotta and spread over the two pieces of hot toast, then serve on the side of the baked eggs in beans. Sprinkle the reserved baby basil leaves over the top and tuck right in. Nice finished with a drizzle of balsamic vinegar and/or a drizzle of hot chilli sauce. Delicious.',
+    10,
+    20,
+    2
+)
+db.session.add(breakfast_recipe_1)
+
+drinks_recipe_1 = Recipe(
+    user,
+    drinks,
+    u'Berry & rosemary juniper gin fizz',
+    u'Nullam rutrum viverra metus ac fermentum. Maecenas condimentum a odio eu tempor. Duis auctor commodo feugiat. Praesent non posuere purus. Donec eget massa ultrices est aliquet facilisis. Sed sed gravida magna. Nunc eu pharetra urna. Pellentesque facilisis mattis enim quis placerat.',
+    u'Aenean dapibus urna pellentesque quam faucibus finibus.\r\n\
+    Praesent vitae ligula et felis tempus malesuada.\r\n\
+    Quisque quis ligula quis augue laoreet sollicitudin in ut ligula.\r\n\
+    Integer ut mi rhoncus metus ultrices molestie ut ut arcu.\r\n\
+    Morbi volutpat tortor sit amet dapibus semper.\r\n\
+    Donec at felis sit amet magna consequat volutpat.',
+    u'Duis porta maximus interdum. Aliquam non erat leo.\r\n\
+    Donec id tempus ipsum, et euismod tortor. Pellentesque sagittis ac erat non mattis.\r\n\
+    Praesent a enim urna. Mauris porta tortor quis ligula blandit, nec dapibus nisl convallis.\r\n\
+    Quisque placerat metus dolor, et sagittis dui ornare at. Duis ac velit vestibulum, vestibulum augue quis, aliquam nunc.\r\n\
+    Morbi eget sem ut arcu vestibulum faucibus et sed massa.',
+    75,
+    45,
+    9
+)
+db.session.add(drinks_recipe_1)
+
+dinner_recipe_1 = Recipe(
+    user,
+    dinner,
+    u'Whole roasted pheasant',
+    u'Nullam rutrum viverra metus ac fermentum. Maecenas condimentum a odio eu tempor. Duis auctor commodo feugiat. Praesent non posuere purus. Donec eget massa ultrices est aliquet facilisis. Sed sed gravida magna. Nunc eu pharetra urna. Pellentesque facilisis mattis enim quis placerat.',
+    u'Aenean dapibus urna pellentesque quam faucibus finibus.\r\n\
+    Praesent vitae ligula et felis tempus malesuada.\r\n\
+    Quisque quis ligula quis augue laoreet sollicitudin in ut ligula.\r\n\
+    Integer ut mi rhoncus metus ultrices molestie ut ut arcu.\r\n\
+    Morbi volutpat tortor sit amet dapibus semper.\r\n\
+    Donec at felis sit amet magna consequat volutpat.',
+    u'Duis porta maximus interdum. Aliquam non erat leo.\r\n\
+    Donec id tempus ipsum, et euismod tortor. Pellentesque sagittis ac erat non mattis.\r\n\
+    Praesent a enim urna. Mauris porta tortor quis ligula blandit, nec dapibus nisl convallis.\r\n\
+    Quisque placerat metus dolor, et sagittis dui ornare at. Duis ac velit vestibulum, vestibulum augue quis, aliquam nunc.\r\n\
+    Morbi eget sem ut arcu vestibulum faucibus et sed massa.',
+    95,
+    55,
+    4
+)
+db.session.add(dinner_recipe_1)
+
+fruits_recipe_1 = Recipe(
+    user,
+    fruits,
+    u'Classic ratatouille',
+    u'Nullam rutrum viverra metus ac fermentum. Maecenas condimentum a odio eu tempor. Duis auctor commodo feugiat. Praesent non posuere purus. Donec eget massa ultrices est aliquet facilisis. Sed sed gravida magna. Nunc eu pharetra urna. Pellentesque facilisis mattis enim quis placerat.',
+    u'Aenean dapibus urna pellentesque quam faucibus finibus.\r\n\
+    Praesent vitae ligula et felis tempus malesuada.\r\n\
+    Quisque quis ligula quis augue laoreet sollicitudin in ut ligula.\r\n\
+    Integer ut mi rhoncus metus ultrices molestie ut ut arcu.\r\n\
+    Morbi volutpat tortor sit amet dapibus semper.\r\n\
+    Donec at felis sit amet magna consequat volutpat.',
+    u'Duis porta maximus interdum. Aliquam non erat leo.\r\n\
+    Donec id tempus ipsum, et euismod tortor. Pellentesque sagittis ac erat non mattis.\r\n\
+    Praesent a enim urna. Mauris porta tortor quis ligula blandit, nec dapibus nisl convallis.\r\n\
+    Quisque placerat metus dolor, et sagittis dui ornare at. Duis ac velit vestibulum, vestibulum augue quis, aliquam nunc.\r\n\
+    Morbi eget sem ut arcu vestibulum faucibus et sed massa.',
+    95,
+    55,
+    4
+)
+db.session.add(fruits_recipe_1)
+
+sea_recipe_1 = Recipe(
+    user,
+    sea,
+    u'Prawn panzanella',
+    u'Nullam rutrum viverra metus ac fermentum. Maecenas condimentum a odio eu tempor. Duis auctor commodo feugiat. Praesent non posuere purus. Donec eget massa ultrices est aliquet facilisis. Sed sed gravida magna. Nunc eu pharetra urna. Pellentesque facilisis mattis enim quis placerat.',
+    u'Aenean dapibus urna pellentesque quam faucibus finibus.\r\n\
+    Praesent vitae ligula et felis tempus malesuada.\r\n\
+    Quisque quis ligula quis augue laoreet sollicitudin in ut ligula.\r\n\
+    Integer ut mi rhoncus metus ultrices molestie ut ut arcu.\r\n\
+    Morbi volutpat tortor sit amet dapibus semper.\r\n\
+    Donec at felis sit amet magna consequat volutpat.',
+    u'Duis porta maximus interdum. Aliquam non erat leo.\r\n\
+    Donec id tempus ipsum, et euismod tortor. Pellentesque sagittis ac erat non mattis.\r\n\
+    Praesent a enim urna. Mauris porta tortor quis ligula blandit, nec dapibus nisl convallis.\r\n\
+    Quisque placerat metus dolor, et sagittis dui ornare at. Duis ac velit vestibulum, vestibulum augue quis, aliquam nunc.\r\n\
+    Morbi eget sem ut arcu vestibulum faucibus et sed massa.',
+    95,
+    55,
+    4
+)
+db.session.add(sea_recipe_1)
+
 # save changes
 db.session.commit()
