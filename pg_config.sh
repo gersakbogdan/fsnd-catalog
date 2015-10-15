@@ -1,18 +1,17 @@
 apt-get -qqy update
 apt-get -qqy install git
-apt-get -qqy install postgresql python-psycopg2
-apt-get -qqy install python-flask python-sqlalchemy
+apt-get -qqy install postgresql
+apt-get -qqy install python-psycopg2
+apt-get -qqy install python-flask
+apt-get -qqy install python-sqlalchemy
 apt-get -qqy install python-pip
 apt-get -qqy install python-dev
 apt-get -qqy install libjpeg-dev
 apt-get -qqy install zlib1g-dev
-pip install bleach
-pip install oauth2client
-pip install requests
-pip install httplib2
-pip install networkx
+
 pip install virtualenv
 pip install xmltodict
+
 su postgres -c 'createuser -dRS vagrant'
 su vagrant -c 'createdb'
 su vagrant -c 'createdb forum'
