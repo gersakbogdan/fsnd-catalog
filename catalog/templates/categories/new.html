@@ -15,13 +15,23 @@
                             <div class="control-group form-group{% if form.name.errors|length%} has-error{% endif %}">
                                 <div class="controls">
                                     <label>Name:</label>
-                                    {{ form.name(class='form-control', required=true, maxlength=20, **{'data-validation-required-message':'Please enter category title'}) }}
+                                    {{ form.name(class='form-control', required=true, maxlength=20) }}
+                                    <p class="help-block">
+                                        {% if form.name.errors|length %}
+                                        {{ form.name.errors[0] }}
+                                        {% endif %}
+                                    </p>
                                 </div>
                             </div>
                             <div class="control-group form-group{% if form.description.errors|length%} has-error{% endif %}">
                                 <div class="controls">
                                     <label>Description:</label>
-                                    {{ form.description(rows=3, cols=100, class='form-control', required=true, maxlength=500, **{'data-validation-required-message':'Please enter a description'}) }}
+                                    {{ form.description(rows=3, cols=100, class='form-control', required=true, maxlength=500) }}
+                                    <p class="help-block">
+                                        {% if form.description.errors|length %}
+                                        {{ form.description.errors[0] }}
+                                        {% endif %}
+                                    </p>
                                 </div>
                             </div>
                             <div class="control-group form-group{% if form.image.errors|length%} has-error{% endif %}">

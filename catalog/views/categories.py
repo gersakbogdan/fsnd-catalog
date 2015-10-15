@@ -72,7 +72,8 @@ def edit(category_id):
     elif form.validate_on_submit():
         category.name = form.name.data
         category.description = form.description.data
-        upload_category_image(form.image.data, category.id)
+        if form.image.data and form.image.data.filename:
+            upload_category_image(form.image.data, category.id)
         db.session.add(category)
         db.session.commit()
         flash('Hooray! Category was successfully added!', 'success')

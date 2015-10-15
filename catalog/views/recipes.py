@@ -129,7 +129,6 @@ def edit(recipe_id):
         flash('Hooray! Your recipe was successfully edited!', 'success')
         return redirect(url_for('recipes.view', recipe_id=recipe.id, slug=recipe.slug))
     else:
-        print form.errors.items()
         flash('Oopss! There are some issues to fix here...', 'danger')
 
     return render_template('recipes/edit.html', form=form, recipe_id=recipe.id, images=recipe.images)

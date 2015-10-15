@@ -1,4 +1,4 @@
-from datetime import datetime
+import time
 from urlparse import urljoin
 
 from flask import url_for, request
@@ -45,7 +45,7 @@ class Category(db.Model):
 
     @property
     def image_src(self):
-        return '/%s/categories/%s.png' % (URL_UPLOAD_FOLDER, self.id)
+        return '/%s/categories/%s.png?%s' % (URL_UPLOAD_FOLDER, self.id, int(time.time()))
 
     def __repr__(self):
         return '<Category %r>' % (self.name)

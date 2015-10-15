@@ -15,31 +15,56 @@
                             <div class="control-group form-group{% if form.category.errors|length%} has-error{% endif %}">
                                 <div class="controls">
                                     <label>Category:</label>
-                                    {{ form.category(class='form-control', **{'data-validation-required-message':'Please select category'}) }}
+                                    {{ form.category(class='form-control') }}
+                                    <p class="help-block">
+                                        {% if form.category.errors|length %}
+                                        {{ form.category.errors[0] }}
+                                        {% endif %}
+                                    </p>
                                 </div>
                             </div>
                             <div class="control-group form-group{% if form.title.errors|length%} has-error{% endif %}">
                                 <div class="controls">
                                     <label>Title:</label>
-                                    {{ form.title(class='form-control', required=true, maxlength=200, **{'data-validation-required-message':'Please enter recipe title'}) }}
+                                    {{ form.title(class='form-control', required=true, maxlength=200) }}
+                                    <p class="help-block">
+                                        {% if form.title.errors|length %}
+                                        {{ form.title.errors[0] }}
+                                        {% endif %}
+                                    </p>
                                 </div>
                             </div>
                             <div class="control-group form-group{% if form.description.errors|length%} has-error{% endif %}">
                                 <div class="controls">
                                     <label>Description:</label>
-                                    {{ form.description(rows=3, cols=100, class='form-control', required=true, maxlength=500, **{'data-validation-required-message':'Please enter a description'}) }}
+                                    {{ form.description(rows=3, cols=100, class='form-control', required=true, maxlength=500) }}
+                                    <p class="help-block">
+                                        {% if form.description.errors|length %}
+                                        {{ form.description.errors[0] }}
+                                        {% endif %}
+                                    </p>
                                 </div>
                             </div>
                             <div class="control-group form-group{% if form.ingredients.errors|length%} has-error{% endif %}">
                                 <div class="controls">
                                     <label>Ingredients:</label>
-                                    {{ form.ingredients(rows=7, cols=100, class='form-control', required=true, maxlength=4000, placeholder='Put each ingredient on its own line.', **{'data-validation-required-message':'Please add some ingredients'}) }}
+                                    {{ form.ingredients(rows=7, cols=100, class='form-control', required=true, maxlength=4000) }}
+                                    <p class="help-block">
+                                        {% if form.ingredients.errors|length %}
+                                        {{ form.ingredients.errors[0] }}
+                                        {% endif %}
+                                    </p>
                                 </div>
                             </div>
                             <div class="control-group form-group{% if form.directions.errors|length%} has-error{% endif %}">
                                 <div class="controls">
                                     <label>Directions:</label>
-                                    {{ form.directions(rows=7, cols=100, class='form-control', required=true, maxlength=4000, placeholder='Put each step on its own line.', **{'data-validation-required-message':'Please enter directions'}) }}
+                                    {{ form.directions(rows=7, cols=100, class='form-control', required=true, maxlength=4000, placeholder='Put each step on its own line.') }}
+                                    <p class="help-block">
+                                        {% if form.directions.errors|length %}
+                                        {{ form.directions.errors[0] }}
+                                        {% endif %}
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -50,8 +75,14 @@
                                     <div class="control-group form-group{% if form.prep_time.errors|length%} has-error{% endif %}">
                                         <div class="controls">
                                             <label>Prep time:</label>
-                                            {{ form.prep_time(class='form-control', required=true, **{'data-validation-required-message':'Please add preparation time'}) }}
-                                            <p class="help-block">Mins: 15, 45, 135</p>
+                                            {{ form.prep_time(class='form-control', required=true) }}
+                                            <p class="help-block">
+                                                {% if form.prep_time.errors|length %}
+                                                {{ form.prep_time.errors[0] }}
+                                                {% else %}
+                                                Minutes: 15, 45, 135
+                                                {% endif %}
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -59,8 +90,14 @@
                                     <div class="control-group form-group{% if form.cook_time.errors|length%} has-error{% endif %}">
                                         <div class="controls">
                                             <label>Cook time:</label>
-                                            {{ form.cook_time(class='form-control', required=true, **{'data-validation-required-message':'Please add cook time'}) }}
-                                            <p class="help-block">Mins: 5, 20, 60</p>
+                                            {{ form.cook_time(class='form-control', required=true) }}
+                                            <p class="help-block">
+                                                {% if form.cook_time.errors|length %}
+                                                {{ form.cook_time.errors[0] }}
+                                                {% else %}
+                                                Minutes: 5, 15, 55, 70
+                                                {% endif %}
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -70,8 +107,14 @@
                                     <div class="control-group form-group{% if form.servings.errors|length%} has-error{% endif %}">
                                         <div class="controls">
                                             <label>Number of servings:</label>
-                                            {{ form.servings(class='form-control', required=true, **{'data-validation-required-message':'Please add number of servings'}) }}
-                                            <p class="help-block">Nr of servings: 1, 3, 5, 10</p>
+                                            {{ form.servings(class='form-control', required=true) }}
+                                            <p class="help-block">
+                                                {% if form.servings.errors|length %}
+                                                {{ form.servings.errors[0] }}
+                                                {% else %}
+                                                Nr of servings: 1, 3, 5, 10
+                                                {% endif %}
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
