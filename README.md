@@ -1,5 +1,5 @@
 ## Udacity FSND -  Catalog Project
-Recipes catalog.
+Udacity Full Stack Web Developer Nanodegree P3 Item Catalog Project
 
 ### Recipes catalog features:
 * Login with Facebook, Twitter or Google+
@@ -7,10 +7,8 @@ Recipes catalog.
 * Create/Read/Upadate/Delete recipes
 * Add/Delete categories images
 * Add/Delete recipes images
-*  Export categories or recipes to JSON or XML format
+* Export categories or recipes to JSON or XML format
 
-### Files & Folders
-    - ...
 
 ### Requirements
 * [Python](https://www.python.org/)
@@ -25,8 +23,15 @@ Recipes catalog.
 * [SQLAlchemy Migrate](https://sqlalchemy-migrate.readthedocs.org/en/latest/)
 * [xmltodict](https://github.com/martinblech/xmltodict)
 
-### Install
-    ...
+### Setup
+* Config Virtualenv
+    *```bash
+     $ virtualenv flask
+     ```
+* Install dependencies
+    *```bash
+     $ ./install.py
+     ```
 
 ### Usage
 ```bash
@@ -38,7 +43,7 @@ $ ./run.py
     ....
 
 ### Resources
-* Udacity courses
+* **Udacity courses**
     * [Full Stack Foundations](https://www.udacity.com/course/full-stack-foundations--ud088)
     * [Authentication & Authorization: OAuth](https://www.udacity.com/course/authentication-authorization-oauth--ud330)
 * Flask
