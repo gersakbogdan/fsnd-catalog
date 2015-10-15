@@ -1,14 +1,12 @@
 ## Udacity FSND -  Catalog Project
-Catalog of recipes.
+Recipes catalog.
 
 ### Recipes catalog features:
 * Login with Facebook, Twitter or Google+
-
 * Create/Read/Update/Delete recipe categories
 * Create/Read/Upadate/Delete recipes
 * Add/Delete categories images
 * Add/Delete recipes images
-
 *  Export categories or recipes to JSON or XML format
 
 ### Files & Folders
@@ -31,7 +29,9 @@ Catalog of recipes.
     ...
 
 ### Usage
-    ...
+    ```bash
+    $ ./run.py
+    ```
 
 ### Screenshots
     ....
