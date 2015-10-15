@@ -25,13 +25,13 @@ Udacity Full Stack Web Developer Nanodegree P3 Item Catalog Project
 
 ### Setup
 * Config Virtualenv
-    *```bash
-     $ virtualenv flask
-     ```
+    * ```$ virtualenv flask```
 * Install dependencies
-    *```bash
-     $ ./install.py
-     ```
+    * ```$ ./install.py```
+* Create database
+    * ```$ ./db-create.py```
+* Populate database (add some categories and recipes)
+    * ```$ ./db-populate.py```
 
 ### Usage
 ```bash
