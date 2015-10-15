@@ -45,7 +45,7 @@ Udacity Full Stack Web Developer Nanodegree P3 Item Catalog Project
 
 ### Screenshots
 ![ScreenShot Index](/screenshots/1_index.png)
-    * [All screenshots](/screenshots/)
+[View more screenshots](/screenshots/)
 
 ### Resources
 * **Udacity courses**
