@@ -29,9 +29,9 @@ Recipes catalog.
     ...
 
 ### Usage
-    ```bash
+```bash
     $ ./run.py
-    ```
+```
 
 ### Screenshots
     ....
