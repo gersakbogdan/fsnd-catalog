@@ -25,9 +25,9 @@ Udacity Full Stack Web Developer Nanodegree P3 Item Catalog Project
 ### Setup
 * Install [VirtualBox](https://www.virtualbox.org/) and [Vagrant](https://www.vagrantup.com/)
 * Launch & Connect to the VagrantVM
-    *```$ vagrant up```
-    *```$ vagrant ssh```
-    *```$ cd /vagrant/catalog``` # navigate to project root folder
+    * ```$ vagrant up```
+    * ```$ vagrant ssh```
+    * ```$ cd /vagrant/catalog``` # navigate to project root folder
 * Config Virtualenv from the root folder
     * ```$ virtualenv flask```
 * Install dependencies
