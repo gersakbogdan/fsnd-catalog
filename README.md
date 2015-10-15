@@ -30,14 +30,24 @@ Recipes catalog.
 
 ### Usage
 ```bash
-    $ ./run.py
+$ ./run.py
 ```
+
 
 ### Screenshots
     ....
 
 ### Resources
-    ....
+* Udacity courses
+    * [Full Stack Foundations](https://www.udacity.com/course/full-stack-foundations--ud088)
+    * [Authentication & Authorization: OAuth](https://www.udacity.com/course/authentication-authorization-oauth--ud330)
+* Flask
+    * [The Flask Mega-Tutorial](http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world)
+    * [OAuth Authentication with Flask](http://blog.miguelgrinberg.com/post/oauth-authentication-with-flask)
+* OAuth Integration
+    * [Facebook](https://developers.facebook.com/docs/facebook-login/manually-build-a-login-flow)
+    * [Twitter](https://dev.twitter.com/oauth)
+    * [Google+](https://developers.google.com/+/web/api/rest/oauth)
 
 $ virtualenv flask
 
