@@ -44,7 +44,8 @@ Udacity Full Stack Web Developer Nanodegree P3 Item Catalog Project
     * Open in your favourite browser: ```http://localhost:8000```
 
 ### Screenshots
-    ....
+![ScreenShot Index](/screenshots/1_index.png)
+    * [All screenshots](/screenshots/)
 
 ### Resources
 * **Udacity courses**
