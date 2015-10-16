@@ -36,8 +36,8 @@ Udacity Full Stack Web Developer Nanodegree P3 Item Catalog Project
     * ```$ ./db-create.py```
 * Add test data
     * ```$ ./db-populate.py```
-* Settings
-    * Open config.py and update ```OAUTH_CREDENTIALS``` with Facebook, Twitter and Google+ oauth details
+* Open & Change config.py
+    * Update ```OAUTH_CREDENTIALS``` with Facebook, Twitter and Google+ oauth details
     * Append your e-mail address to ```ADMIN``` list (you need admin rights to add/edit categories)
 * Run
     * ```$ ./run.py```
