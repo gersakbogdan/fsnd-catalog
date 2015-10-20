@@ -8,10 +8,12 @@ from catalog import app, db
 from catalog.helpers import slugify
 from config import URL_UPLOAD_FOLDER
 
+
 class Category(db.Model):
     """"Category model class.
 
-    This class represents one category. Each category has a name, a description and one image. All fields are required.
+    This class represents one category. Each category has a name,
+    a description and one image. All fields are required.
     """
 
     __tablename__ = 'category'
@@ -45,7 +47,9 @@ class Category(db.Model):
 
     @property
     def image_src(self):
-        return '/%s/categories/%s.png?%s' % (URL_UPLOAD_FOLDER, self.id, int(time.time()))
+        return '/%s/categories/%s.png?%s' % (
+            URL_UPLOAD_FOLDER, self.id, int(time.time())
+        )
 
     def __repr__(self):
         return '<Category %r>' % (self.name)

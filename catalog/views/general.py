@@ -5,6 +5,7 @@ from catalog.models.recipe import Recipe
 
 mod = Blueprint('general', __name__)
 
+
 @mod.route('/')
 def index():
     """Catalog main index page.
@@ -12,15 +13,21 @@ def index():
     Displays the list of popular categories and latest recipes.
     """
 
-    recipes = db.session.query(Recipe).order_by(Recipe.id.desc()).limit(8).all()
+    recipes = db.session.query(Recipe).order_by(Recipe.id.desc()) \
+        .limit(8).all()
+
     categories = db.session.query(Category).limit(6).all()
-    return render_template('general/index.html', recipes=recipes, categories=categories)
+    return render_template(
+        'general/index.html', recipes=recipes, categories=categories
+    )
+
 
 @app.errorhandler(404)
 def not_found(error):
     """404 Error handler method."""
 
     return render_template('errors/404.html'), 404
+
 
 @app.errorhandler(500)
 def internal_error(error):

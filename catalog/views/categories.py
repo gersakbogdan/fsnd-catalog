@@ -1,14 +1,17 @@
 from xmltodict import unparse
-from flask import Blueprint, render_template, flash, request, redirect, url_for, jsonify, Response
+from flask import Blueprint, render_template, flash, request
+from flask import redirect, url_for, jsonify, Response
 from flask.ext.login import current_user, login_required
 from sqlalchemy.orm import exc
 
 from catalog import db
 from catalog.forms.category import CategoryForm
 from catalog.models.category import Category
-from catalog.helpers import upload_category_image, delete_category_image, csrf_protect
+from catalog.helpers import upload_category_image, delete_category_image
+from catalog.helpers import csrf_protect
 
 mod = Blueprint('categories', __name__, url_prefix='/categories')
+
 
 @mod.route('/')
 def index():
@@ -19,6 +22,7 @@ def index():
 
     categories = db.session.query(Category).order_by(Category.name).all()
     return render_template('categories/index.html', categories=categories)
+
 
 @mod.route('/new/', methods=['GET', 'POST'])
 @login_required
@@ -47,6 +51,7 @@ def new():
         print form.errors.items()
         flash('Oopss! There are some issues to fix here...', 'danger')
     return render_template('categories/new.html', form=form)
+
 
 @mod.route('/<int:category_id>/edit/', methods=['GET', 'POST'])
 @login_required
@@ -80,16 +85,20 @@ def edit(category_id):
     else:
         print form.errors.items()
         flash('Oopss! There are some issues to fix here...', 'danger')
-    return render_template('categories/edit.html', form=form, category_image=category.image_src)
+    return render_template(
+        'categories/edit.html', form=form, category_image=category.image_src
+    )
+
 
 @mod.route('/<int:category_id>/delete/', methods=['GET', 'POST'])
 @login_required
 def delete(category_id):
     """Delete category handler.
 
-    Deletes the category from the database if exists. All the associated recipes and images
-    will also be deleted.
-    This page can be accessed only by logged in users and CSRF check runs for each delete.
+    Deletes the category from the database if exists. All the associated
+    recipes and images will also be deleted.
+    This page can be accessed only by logged in users and CSRF check runs
+    for each delete.
 
     Args:
         category_id: The category id to be deleted
@@ -98,11 +107,15 @@ def delete(category_id):
     if request.method == 'GET':
         return redirect(url_for('categories.index'))
     elif current_user.is_admin:
-        csrf_protect() # csrf protection
+        csrf_protect()  # csrf protection
         try:
-            category = db.session.query(Category).filter_by(id=category_id).one()
+            category = db.session.query(Category) \
+                .filter_by(id=category_id) \
+                .one()
             db.session.delete(category)
-            flash('Category "%s" successfully deleted' % category.name, 'success',)
+            flash(
+                'Category "%s" successfully deleted' % category.name, 'success'
+            )
             delete_category_image(category_id)
             db.session.commit()
         except exc.NoResultFound:
@@ -114,8 +127,9 @@ def delete(category_id):
 
         return 'success'
 
-    flash('Oopss! It seems that you dont have the right to delete categories!', 'danger')
+    flash('Oopss! You are not allowed to delete categories!', 'danger')
     return 'error'
+
 
 @mod.route('.json')
 def json():
@@ -124,10 +138,17 @@ def json():
     categories = db.session.query(Category).order_by(Category.name)
     return jsonify(categories=[category.to_dict() for category in categories])
 
+
 @mod.route('.xml')
 def xml():
     """Categories list in XML format."""
 
     categories = db.session.query(Category).order_by(Category.name)
-    xml = unparse(dict(categories=dict(category=[category.to_dict() for category in categories])))
+    xml = unparse(
+        dict(
+            categories=dict(
+                category=[category.to_dict() for category in categories]
+            )
+        )
+    )
     return Response(xml, mimetype='text/xml')

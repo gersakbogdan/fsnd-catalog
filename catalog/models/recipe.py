@@ -7,12 +7,16 @@ from catalog import db
 from catalog.helpers import slugify, formated_time, delete_recipe_image
 from config import URL_UPLOAD_FOLDER
 
+
 class Recipe(db.Model):
     """Recipe model class.
 
-    This class represents one recipe. Each recipe has an user id, category id, title, description, ingredients,
-    preparation time, cook time, servings and a publish date. All fields are required.
-    Two many to one relations are established between Recipe and Category and between Recipe and User tables.
+    This class represents one recipe. Each recipe has an user id, category id,
+    title, description, ingredients,
+    preparation time, cook time, servings and a publish date.
+    All fields are required.
+    Two many to one relations are established between Recipe and Category
+    and between Recipe and User tables.
     """
 
     __tablename__ = 'recipe'
@@ -29,11 +33,25 @@ class Recipe(db.Model):
     servings = db.Column(db.Integer, nullable=False)
     pub_date = db.Column(db.DateTime)
 
-    user = db.relationship('User', backref=db.backref('recipes', cascade='delete, delete-orphan', lazy='dynamic'))
-    category = db.relationship('Category', backref=db.backref('recipes', cascade='delete, delete-orphan', lazy='dynamic'))
+    user = db.relationship(
+        'User',
+        backref=db.backref(
+            'recipes', cascade='delete, delete-orphan', lazy='dynamic'
+        )
+    )
 
-    def __init__(self, user, category, title, description,
-        ingredients, directions, prep_time, cook_time, servings, pub_date=None):
+    category = db.relationship(
+        'Category',
+        backref=db.backref(
+            'recipes', cascade='delete, delete-orphan', lazy='dynamic'
+        )
+    )
+
+    def __init__(
+        self, user, category, title, description, ingredients,
+        directions, prep_time, cook_time, servings, pub_date=None
+    ):
+
         self.user = user
         self.category = category
         self.title = title
@@ -81,10 +99,13 @@ class Recipe(db.Model):
 
     @property
     def image_src(self):
-        """Returns main recipe image. If none returns default image set for recipes."""
+        """Returns main recipe image."""
 
         if self.images.count() > 0 and self.images[0].filename:
-            return '/%s/recipes/%s' % (URL_UPLOAD_FOLDER, self.images[0].filename)
+            return '/%s/recipes/%s' % (
+                URL_UPLOAD_FOLDER, self.images[0].filename
+            )
+
         return '/static/images/no-image.png'
 
     def __repr__(self):
@@ -94,11 +115,14 @@ class Recipe(db.Model):
 class RecipeImage(db.Model):
     """"Recipe images model class.
 
-    This class create the 'recipe_image' table. Each row will have an id, a recipe_id, a filename and a hidden column.
+    This class create the 'recipe_image' table. Each row will have an id,
+    a recipe_id, a filename and a hidden column.
     All fields are required.
 
-    A many to one relationship is established between this table and Recipe table.
+    A many to one relationship is established between this table and
+    Recipe table.
     """
+
     __tablename__ = 'recipe_image'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -106,7 +130,11 @@ class RecipeImage(db.Model):
     filename = db.Column(db.String(250), nullable=False)
     hidden = db.Column(db.Boolean, nullable=False)
 
-    recipe = db.relationship('Recipe', backref=db.backref('images', cascade='delete, delete-orphan', lazy='dynamic'))
+    recipe = db.relationship(
+        'Recipe',
+        backref=db.backref(
+            'images', cascade='delete, delete-orphan', lazy='dynamic')
+        )
 
     def __init__(self, recipe, filename, hidden=False):
         self.recipe = recipe

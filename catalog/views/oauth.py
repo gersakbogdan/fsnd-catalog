@@ -14,12 +14,13 @@ def load_user(id):
 
     return User.query.get(int(id))
 
+
 @mod.route('/authorize/<provider>/')
 def authorize(provider):
     """Initiate authorization with the provider.
 
-    If there is no logged in user this method initiate the authorization process with the
-    provider received as parameter.
+    If there is no logged in user this method initiate the authorization
+    process with the provider received as parameter.
     Check OAuthSignIn class for more details about authorize implementation.
 
     Args:
@@ -31,12 +32,14 @@ def authorize(provider):
 
     return OAuthSignIn.get_provider(provider).authorize()
 
+
 @mod.route('/callback/<provider>')
 def callback(provider):
     """Verify authorization status.
 
-    This method consist in the second step of authorization with the thirth-party provider.
-    If authorization succeed a new user is added the the database if doesn't exists yet.
+    This method consist in the second step of authorization with the
+    thirth-party provider. If authorization succeed a new user is added to
+    the database if doesn't exists yet.
 
     Args:
         provider: The provider name: facebook, twitter, etc.
@@ -45,7 +48,9 @@ def callback(provider):
     if not current_user.is_anonymous:
         return redirect(url_for('general.index'))
 
-    social_id, username, email, picture = OAuthSignIn.get_provider(provider).callback()
+    social_id, username, email, picture = OAuthSignIn.get_provider(provider) \
+        .callback()
+
     if social_id is None:
         flash('Authentication failed.', 'danger')
         return redirect(url_for('general.index'))
@@ -58,6 +63,7 @@ def callback(provider):
 
     login_user(user, True)
     return redirect(url_for('general.index'))
+
 
 @mod.route('/logout/')
 def logout():

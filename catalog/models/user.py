@@ -2,13 +2,16 @@ from catalog import app, db
 from datetime import datetime
 from flask.ext.login import UserMixin
 
+
 class User(UserMixin, db.Model):
     """User model class.
 
-    This class represents the 'user' table. It inherits from UserMixin which provides the required
-    methods for LoginManager extension.
-    Each row will have an id,social_id, name , email, picture and last seen column.
+    This class represents the 'user' table. It inherits from UserMixin
+    which provides the required methods for LoginManager extension.
+    Each row will have an id,social_id, name , email, picture and
+    last seen column.
     """
+
     __tablename__ = 'user'
 
     id = db.Column(db.Integer, primary_key=True)
