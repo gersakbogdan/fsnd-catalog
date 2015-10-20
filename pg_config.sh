@@ -10,7 +10,6 @@ apt-get -qqy install libjpeg-dev
 apt-get -qqy install zlib1g-dev
 
 pip install virtualenv
-pip install xmltodict
 
 su postgres -c 'createuser -dRS vagrant'
 su vagrant -c 'createdb'

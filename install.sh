@@ -6,3 +6,4 @@ flask/bin/pip install flask-wtf
 flask/bin/pip install rauth
 flask/bin/pip install Pillow
 flask/bin/pip install pylint
+flask/bin/pip install xmltodict
