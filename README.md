@@ -45,12 +45,10 @@ Udacity Full Stack Web Developer Nanodegree P3 Item Catalog Project
     * Open in your favourite browser: ```http://localhost:8000```
 
 ### Notes
-The images upload folder located at ```catalog/static/upload``` contains two folders:
-**Please be sure the folders exists and the proper rights are set.**
+Please be sure the following folders exists and the proper rights are set:
 
-* ```recipes``` - for recipes images
-and
-* ```categories``` - for categories images
+* ```catalog/static/upload/recipes``` - for uploading recipes images
+* ```catalog/static/upload/categories``` - for uploading categories images
 
 
 ### Screenshots
