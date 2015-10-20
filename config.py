@@ -23,7 +23,7 @@ OAUTH_CREDENTIALS = {
 }
 
 # admin users email list
-ADMIN = frozenset(['example@email.dom'])
+ADMIN = frozenset(['example@email.do', 'example@email.dom'])
 
 UPLOAD_FOLDER = os.path.join(basedir, 'catalog', 'static', 'upload')
 URL_UPLOAD_FOLDER = os.path.join('static', 'upload')
