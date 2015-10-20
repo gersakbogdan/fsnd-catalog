@@ -27,7 +27,7 @@ Udacity Full Stack Web Developer Nanodegree P3 Item Catalog Project
 * Launch & Connect to the VagrantVM
     * ```$ vagrant up```
     * ```$ vagrant ssh```
-    * ```$ cd /vagrant/catalog``` # navigate to project root folder
+    * ```$ cd /vagrant``` # navigate to project root folder
 * Config Virtualenv from the root folder
     * ```$ virtualenv flask```
 * Install dependencies
@@ -43,6 +43,13 @@ Udacity Full Stack Web Developer Nanodegree P3 Item Catalog Project
     * ```$ ./run.py```
 * View/Use
     * Open in your favourite browser: ```http://localhost:8000```
+
+### Notes
+The images upload folder located at ```catalog/static/upload``` contains two folders:
+```recipes``` - for recipes images
+and
+```categories``` - for categories images
+**Please be sure this folders exists and has the proper rights.**
 
 ### Screenshots
 ![ScreenShot Index](/screenshots/1_index.png)
