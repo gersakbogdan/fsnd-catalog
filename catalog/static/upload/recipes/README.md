@@ -1,0 +1,1 @@
+Recipe images upload folder
