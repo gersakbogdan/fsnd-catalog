@@ -46,10 +46,11 @@ Udacity Full Stack Web Developer Nanodegree P3 Item Catalog Project
 
 ### Notes
 The images upload folder located at ```catalog/static/upload``` contains two folders:
+**Please be sure the folders exists and the proper rights are set.**
+
 * ```recipes``` - for recipes images
 and
 * ```categories``` - for categories images
-* **Please be sure the folders exists and the proper rights are set.**
 
 
 ### Screenshots
